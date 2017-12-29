@@ -46,23 +46,6 @@ public class GenerateGrid : MonoBehaviour
             }
         }
 
-        // Create Field
-
-        foreach (GameObject hex in Hexagons)
-        {
-            HexScript script = hex.GetComponent<HexScript>();
-
-            //Generatenumber
-            int randomWall = Random.Range(0, 10);
-
-            if (randomWall < 7)
-            {
-
-            }
-
-
-        }
-
     }
 
 }
