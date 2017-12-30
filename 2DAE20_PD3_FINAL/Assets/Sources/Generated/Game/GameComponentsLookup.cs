@@ -12,16 +12,18 @@ public static class GameComponentsLookup {
     public const int GridPos = 1;
     public const int Hex = 2;
     public const int Move = 3;
-    public const int View = 4;
-    public const int WorldPos = 5;
+    public const int Selected = 4;
+    public const int View = 5;
+    public const int WorldPos = 6;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
         "Click",
         "GridPos",
         "Hex",
         "Move",
+        "Selected",
         "View",
         "WorldPos"
     };
@@ -31,6 +33,7 @@ public static class GameComponentsLookup {
         typeof(GridPos),
         typeof(HexComponent),
         typeof(MoveComponent),
+        typeof(SelectedComponent),
         typeof(ViewComponent),
         typeof(WorldPosComponent)
     };
