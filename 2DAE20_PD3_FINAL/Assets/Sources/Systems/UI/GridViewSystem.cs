@@ -25,7 +25,8 @@ public class GridViewSystem : IInitializeSystem
             GameObject temp = UnityEngine.Object.Instantiate(tile, pos, Quaternion.identity, shell.transform);
 
             // Assigning the created tile to the corresponding entity
-            e.AddView(temp);
+            e.AddView(temp, temp.GetComponent<Renderer>().material.color);
+
         }
     }
 }

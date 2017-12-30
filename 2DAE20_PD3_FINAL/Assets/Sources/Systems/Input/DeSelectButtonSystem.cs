@@ -23,6 +23,7 @@ public class DeSelectButtonSystem : IExecuteSystem {
             {
                 e.isClick = true;
                 e.isSelected = false;
+                e.view.View.gameObject.GetComponent<Renderer>().material.color = e.view.BaseColor;
             }
         }
     }

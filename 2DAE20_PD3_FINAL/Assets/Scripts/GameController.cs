@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
             .Add(new GridViewSystem(contexts))
             .Add(new SelectButtonSystem(contexts, MaxSelectDist))
             .Add(new DeSelectButtonSystem(contexts))
+            .Add(new ViewSelectedSystem(contexts))
             ;
 
     }

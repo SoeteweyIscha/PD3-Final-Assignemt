@@ -48,6 +48,7 @@ public class SelectButtonSystem : IExecuteSystem
             {
 
                 closest.isClick = false;
+                closest.isSelected = true;
                 Debug.Log(shortestDist);
 
             }

@@ -4,5 +4,6 @@ using UnityEngine;
 [Game]
 public class ViewComponent : IComponent {
 
-    public GameObject view;
+    public GameObject View;
+    public Color BaseColor;
 }
