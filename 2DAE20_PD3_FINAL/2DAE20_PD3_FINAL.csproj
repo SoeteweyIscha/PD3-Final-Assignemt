@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -240,20 +240,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameClickComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameGridPosComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameHexComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameMoveComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameWorldPosComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameComponentsLookup.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameContext.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameMatcher.cs" />
-    <Compile Include="Assets\Sources\Generated\Contexts.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
-    <Compile Include="Assets\Sources\Generated\Feature.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\HexGrid\GenerateGrid.cs" />
     <Compile Include="Assets\Scripts\HexGrid\HexScript.cs" />
@@ -261,7 +247,22 @@
     <Compile Include="Assets\Sources\Components\GridPosComponent.cs" />
     <Compile Include="Assets\Sources\Components\HexComponent.cs" />
     <Compile Include="Assets\Sources\Components\MoveComponent.cs" />
+    <Compile Include="Assets\Sources\Components\ViewComponent.cs" />
     <Compile Include="Assets\Sources\Components\WorldPosComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Contexts.cs" />
+    <Compile Include="Assets\Sources\Generated\Feature.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameClickComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameGridPosComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameHexComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameMoveComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameWorldPosComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameContext.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameMatcher.cs" />
+    <Compile Include="Assets\Sources\Systems\Input\SelectButtonSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\GridGenerationSystem.cs" />
     <Compile Include="Assets\Sources\Systems\UI\GridViewSystem.cs" />
     <Compile Include="Assets\ThirdParty\Entitas\Compile.cs" />

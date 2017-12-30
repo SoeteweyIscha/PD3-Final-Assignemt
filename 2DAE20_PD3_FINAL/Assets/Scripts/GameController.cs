@@ -17,11 +17,18 @@ public class GameController : MonoBehaviour {
         _systems.Initialize();
 	}
 
+    private void Update()
+    {
+        _systems.Execute();
+    }
+
     private Systems CreateSystems( Contexts contexts )
     {
         return new Feature("Game")
             .Add(new GridGenerationSystem( contexts, GridWidth, GridHeight ))
-            .Add(new GridViewSystem(contexts));
+            .Add(new GridViewSystem(contexts))
+            .Add(new SelectButtonSystem(contexts))
+            ;
 
     }
 }

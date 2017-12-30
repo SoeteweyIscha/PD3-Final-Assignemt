@@ -28,6 +28,7 @@ public class GridGenerationSystem : IInitializeSystem {
                 entity.AddGridPos(w, h);
                 entity.AddWorldPos(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2);
                 entity.isHex = true;
+                entity.isClick = true;
             }
         }
     }
