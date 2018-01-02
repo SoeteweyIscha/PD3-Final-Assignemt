@@ -32,6 +32,7 @@ public class GridGenerationSystem : IInitializeSystem {
                 // Give the entities a worldpos, using modulo function to give correct offset
                 entity.AddWorldPos(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2);
                 entity.isHex = true;
+                entity.isWalkAble = true;
                 entity.isClick = true;
             }
         }

@@ -2,5 +2,4 @@
 
 [Game]
 public class ClickComponent : IComponent {
-
 }

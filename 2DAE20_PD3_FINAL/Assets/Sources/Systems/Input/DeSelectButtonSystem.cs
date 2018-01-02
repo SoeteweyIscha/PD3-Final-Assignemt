@@ -21,8 +21,6 @@ public class DeSelectButtonSystem : IExecuteSystem {
             _objects = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Hex));
             foreach (var e in _objects)
             {
-                e.isClick = true;
-                e.isSelected = false;
                 e.view.View.gameObject.GetComponent<Renderer>().material.color = e.view.BaseColor;
             }
         }
