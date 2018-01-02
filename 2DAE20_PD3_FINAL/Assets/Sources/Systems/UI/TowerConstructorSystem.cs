@@ -52,9 +52,10 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
 
             temp.AddView(tempView, tempView.GetComponentInChildren<Renderer>().material.color);
             temp.AddGridPos(e.gridPos.x, e.gridPos.y);
-
+            temp.isTargeting = true;
+            // link tile to tower
             temp.AddBaseTile(e);
-            //link the tower to the tile
+            
 
         }
 

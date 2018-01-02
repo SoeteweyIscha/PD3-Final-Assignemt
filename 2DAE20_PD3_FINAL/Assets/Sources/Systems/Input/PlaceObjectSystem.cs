@@ -14,13 +14,15 @@ public class PlaceObjectSystem : IExecuteSystem
     public PlaceObjectSystem(Contexts contexts, float range, GameController gameController)
     {
         _contexts = contexts;
-        _clickables = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Click));
+        
         _maxSelectRange = range;
         _gameController = gameController;
     }
 
     public void Execute()
     {
+
+        _clickables = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Click));
         //Set State
         _stateToSet = _gameController.BuildingState;
 
