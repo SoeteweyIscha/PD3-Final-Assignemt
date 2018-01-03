@@ -42,6 +42,7 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
                 case GameController.Building.Tower:
                     tempView = GameObject.Instantiate(Resources.Load<GameObject>("Tower"), pos, Quaternion.identity);
                     temp.AddHealth(3);
+                    temp.isTargeting = true;
                     break;
 
                 case GameController.Building.Wall:
@@ -52,7 +53,7 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
 
             temp.AddView(tempView, tempView.GetComponentInChildren<Renderer>().material.color);
             temp.AddGridPos(e.gridPos.x, e.gridPos.y);
-            temp.isTargeting = true;
+
             // link tile to tower
             temp.AddBaseTile(e);
             

@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour {
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
             .Add(new TowerConstructorSystem(contexts))
             .Add(new TargetingSystem(contexts, TestTarget))
+            .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
             ;
 
     }

@@ -241,8 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\HexGrid\GenerateGrid.cs" />
-    <Compile Include="Assets\Scripts\HexGrid\HexScript.cs" />
+    <Compile Include="Assets\Scripts\Outdated Scripts\DeSelectButtonSystem.cs" />
+    <Compile Include="Assets\Scripts\Outdated Scripts\SelectButtonSystem.cs" />
+    <Compile Include="Assets\Scripts\Outdated Scripts\ViewSelectedSystem.cs" />
     <Compile Include="Assets\Sources\Components\BaseTileComponent.cs" />
     <Compile Include="Assets\Sources\Components\BuidingComponent.cs" />
     <Compile Include="Assets\Sources\Components\ClickComponent.cs" />
@@ -274,14 +275,12 @@
     <Compile Include="Assets\Sources\Generated\Game\GameContext.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameMatcher.cs" />
-    <Compile Include="Assets\Sources\Systems\Input\DeSelectButtonSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Input\PlaceObjectSystem.cs" />
-    <Compile Include="Assets\Sources\Systems\Input\SelectButtonSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\GridGenerationSystem.cs" />
+    <Compile Include="Assets\Sources\Systems\Logic\PathfindingSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\TargetingSystem.cs" />
     <Compile Include="Assets\Sources\Systems\UI\GridViewSystem.cs" />
     <Compile Include="Assets\Sources\Systems\UI\TowerConstructorSystem.cs" />
-    <Compile Include="Assets\Sources\Systems\UI\ViewSelectedSystem.cs" />
     <Compile Include="Assets\ThirdParty\Entitas\Compile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
