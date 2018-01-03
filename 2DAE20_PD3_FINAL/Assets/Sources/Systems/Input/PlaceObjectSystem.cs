@@ -45,7 +45,7 @@ public class PlaceObjectSystem : IExecuteSystem
             foreach (var e in objects)
             {
                 //Make Vector from variables
-                Vector3 epos = e.worldPos.Position;
+                Vector3 epos = e.vectorPos.Position;
 
                 float distance = Vector3.Distance(mousePos, epos);
                 if (distance < shortestDist && distance < _maxSelectRange)

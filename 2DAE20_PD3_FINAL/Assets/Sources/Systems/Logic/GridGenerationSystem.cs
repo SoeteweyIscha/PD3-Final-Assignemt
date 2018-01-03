@@ -29,8 +29,8 @@ public class GridGenerationSystem : IInitializeSystem {
                 var entity = _context.game.CreateEntity();
                 entity.AddGridPos(w, h);
 
-                // Give the entities a worldpos, using modulo function to give correct offset
-                entity.AddWorldPos(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2);
+                // Give the entities a vectorPos, using modulo function to give correct offset
+                entity.AddVectorPos(new Vector3(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2));
                 entity.isHex = true;
                 entity.isWalkAble = true;
                 entity.isClick = true;

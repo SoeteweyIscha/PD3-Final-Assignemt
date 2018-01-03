@@ -30,7 +30,7 @@ public class EnemyBuilder : ReactiveSystem<GameEntity>
         var entity = _contexts.game.CreateEntity();
 
         entity.AddGridPos(0, 0);
-        entity.AddWorldPos(0, 0, 0);
+        entity.AddVectorPos(Vector3.zero);
         entity.AddHealth(1);
         entity.AddPath(0, GameController.StartPath);
 

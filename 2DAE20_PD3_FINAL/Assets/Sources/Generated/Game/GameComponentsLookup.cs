@@ -20,11 +20,12 @@ public static class GameComponentsLookup {
     public const int Path = 9;
     public const int Selected = 10;
     public const int Targeting = 11;
-    public const int View = 12;
-    public const int WalkAble = 13;
-    public const int WorldPos = 14;
+    public const int VectorPos = 12;
+    public const int View = 13;
+    public const int WalkAble = 14;
+    public const int WorldPos = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "BaseTile",
@@ -39,6 +40,7 @@ public static class GameComponentsLookup {
         "Path",
         "Selected",
         "Targeting",
+        "VectorPos",
         "View",
         "WalkAble",
         "WorldPos"
@@ -57,6 +59,7 @@ public static class GameComponentsLookup {
         typeof(PathComponent),
         typeof(SelectedComponent),
         typeof(TargetingComponent),
+        typeof(VectorPosComponent),
         typeof(ViewComponent),
         typeof(WalkAble),
         typeof(WorldPosComponent)

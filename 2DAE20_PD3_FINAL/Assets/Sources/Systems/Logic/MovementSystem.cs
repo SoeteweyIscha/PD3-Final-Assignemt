@@ -22,16 +22,16 @@ public class EnemyMovementSystem : IExecuteSystem {
         foreach (var enemy in enemies)
         {
             //Create Vectors
-            Vector3 enemyPos = enemy.worldPos.Position;
+            Vector3 enemyPos = enemy.vectorPos.Position;
             GameEntity nextTile = enemy.path.Path[enemy.path.CurrentNode + 1];
-            Vector3 nextTargetPos = nextTile.worldPos.Position;
+            Vector3 nextTargetPos = nextTile.vectorPos.Position;
 
             //Check distance to current node
             if (Vector3.Distance(enemyPos, nextTargetPos) < _range)
             {
                 enemy.path.CurrentNode++;
                 nextTile = enemy.path.Path[enemy.path.CurrentNode + 1];
-                nextTargetPos = nextTile.worldPos.Position;
+                nextTargetPos = nextTile.vectorPos.Position;
             }
 
 

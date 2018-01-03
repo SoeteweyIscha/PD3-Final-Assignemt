@@ -38,12 +38,12 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
         _spawnpoint = entitiesArray[0];
         _target = entitiesArray[9 * _rows + 9];
-        Vector3 targetPos = _target.worldPos.Position; 
+        Vector3 targetPos = _target.vectorPos.Position; 
 
         //Add distanceComponent
         foreach (GameEntity e in entitiesArray)
         {
-            Vector3 localPos = e.worldPos.Position;
+            Vector3 localPos = e.vectorPos.Position;
             e.AddDistance( Vector3.Distance(localPos, targetPos));
         }
 
@@ -75,11 +75,11 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         _spawnpoint = entitiesArray[0];
         _target = entitiesArray[9 * _rows + 9];
         Debug.Log(entitiesArray[3 * _rows + 3]);
-        Vector3 targetPos = _target.worldPos.Position;
+        Vector3 targetPos = _target.vectorPos.Position;
 
         foreach (GameEntity e in entitiesArray)
         {
-            Vector3 localPos = e.worldPos.Position;
+            Vector3 localPos = e.vectorPos.Position;
             e.AddDistance(Vector3.Distance(localPos, targetPos));
         }
 

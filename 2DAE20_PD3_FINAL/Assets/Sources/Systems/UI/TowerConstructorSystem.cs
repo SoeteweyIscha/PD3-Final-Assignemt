@@ -33,7 +33,7 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
             temp.AddBuiding(e.buiding.state);
 
             //Create Gameobject to render
-            Vector3 pos = e.worldPos.Position;
+            Vector3 pos = e.vectorPos.Position;
             GameObject tempView = null;
 
             //Add components specific to building type to the entity

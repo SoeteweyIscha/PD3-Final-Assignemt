@@ -11,21 +11,23 @@ public partial class GameEntity {
     public WorldPosComponent worldPos { get { return (WorldPosComponent)GetComponent(GameComponentsLookup.WorldPos); } }
     public bool hasWorldPos { get { return HasComponent(GameComponentsLookup.WorldPos); } }
 
-    public void AddWorldPos(float newX, float newY, float newZ) {
+    public void AddWorldPos(float newX, float newY, float newZ, UnityEngine.Vector3 newPosition) {
         var index = GameComponentsLookup.WorldPos;
         var component = CreateComponent<WorldPosComponent>(index);
         component.x = newX;
         component.y = newY;
         component.z = newZ;
+        component.Position = newPosition;
         AddComponent(index, component);
     }
 
-    public void ReplaceWorldPos(float newX, float newY, float newZ) {
+    public void ReplaceWorldPos(float newX, float newY, float newZ, UnityEngine.Vector3 newPosition) {
         var index = GameComponentsLookup.WorldPos;
         var component = CreateComponent<WorldPosComponent>(index);
         component.x = newX;
         component.y = newY;
         component.z = newZ;
+        component.Position = newPosition;
         ReplaceComponent(index, component);
     }
 

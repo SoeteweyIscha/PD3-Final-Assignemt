@@ -252,6 +252,7 @@
     <Compile Include="Assets\Sources\Generated\Game\Components\GamePathComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameSelectedComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameTargetingComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameVectorPosComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameViewComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameWalkAbleComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameWorldPosComponent.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Assets\Sources\Components\PathComponent.cs" />
     <Compile Include="Assets\Sources\Components\SelectedComponent.cs" />
     <Compile Include="Assets\Sources\Components\TargetingComponent.cs" />
+    <Compile Include="Assets\Sources\Components\VectorPosComponent.cs" />
     <Compile Include="Assets\Sources\Components\ViewComponent.cs" />
     <Compile Include="Assets\Sources\Components\WalkAbleComponent.cs" />
     <Compile Include="Assets\Sources\Components\WorldPosComponent.cs" />
