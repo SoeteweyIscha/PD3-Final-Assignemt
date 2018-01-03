@@ -12,27 +12,31 @@ public static class GameComponentsLookup {
     public const int Buiding = 1;
     public const int Click = 2;
     public const int Distance = 3;
-    public const int GridPos = 4;
-    public const int Health = 5;
-    public const int Hex = 6;
-    public const int Move = 7;
-    public const int Selected = 8;
-    public const int Targeting = 9;
-    public const int View = 10;
-    public const int WalkAble = 11;
-    public const int WorldPos = 12;
+    public const int Enemy = 4;
+    public const int GridPos = 5;
+    public const int Health = 6;
+    public const int Hex = 7;
+    public const int Move = 8;
+    public const int Path = 9;
+    public const int Selected = 10;
+    public const int Targeting = 11;
+    public const int View = 12;
+    public const int WalkAble = 13;
+    public const int WorldPos = 14;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "BaseTile",
         "Buiding",
         "Click",
         "Distance",
+        "Enemy",
         "GridPos",
         "Health",
         "Hex",
         "Move",
+        "Path",
         "Selected",
         "Targeting",
         "View",
@@ -45,10 +49,12 @@ public static class GameComponentsLookup {
         typeof(BuidingComponent),
         typeof(ClickComponent),
         typeof(DistanceComponent),
+        typeof(EnemyComponent),
         typeof(GridPos),
         typeof(HealthComponent),
         typeof(HexComponent),
         typeof(MoveComponent),
+        typeof(PathComponent),
         typeof(SelectedComponent),
         typeof(TargetingComponent),
         typeof(ViewComponent),

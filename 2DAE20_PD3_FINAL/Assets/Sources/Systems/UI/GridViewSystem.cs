@@ -21,7 +21,7 @@ public class GridViewSystem : IInitializeSystem
         GameObject shell = new GameObject("Shell");
         foreach (var e in renderTiles)
         {
-            Vector3 pos = new Vector3(e.worldPos.x, e.worldPos.y, e.worldPos.z);
+            Vector3 pos = e.worldPos.Position;
             GameObject temp = UnityEngine.Object.Instantiate(tile, pos, Quaternion.identity, shell.transform);
 
             // Assigning the created tile to the corresponding entity

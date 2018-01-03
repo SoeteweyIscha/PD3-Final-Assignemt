@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 
-public class PathfindingSystem : ReactiveSystem<GameEntity>
+public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 {
 
     private Contexts _contexts;
@@ -33,21 +34,28 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
     {
         //Get all hexes
         var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
-
+        var enemiesArray = _contexts.game.GetEntities(GameMatcher.Enemy);
 
         _spawnpoint = entitiesArray[0];
         _target = entitiesArray[9 * _rows + 9];
-        Debug.Log( entitiesArray[3 * _rows + 3]);
-        Vector3 targetPos = new Vector3(_target.worldPos.x, _target.worldPos.y, _target.worldPos.z); 
+        Vector3 targetPos = _target.worldPos.Position; 
 
+        //Add distanceComponent
         foreach (GameEntity e in entitiesArray)
         {
-            Vector3 localPos = new Vector3(e.worldPos.x, e.worldPos.y, e.worldPos.z);
+            Vector3 localPos = e.worldPos.Position;
             e.AddDistance( Vector3.Distance(localPos, targetPos));
         }
 
-        FindPath(entitiesArray);
+        if (enemiesArray != null)
+        {
+            foreach (GameEntity enemy in enemiesArray)
+            {
+                enemy.ReplacePath(0, FindPath(entitiesArray, enemy));
+            }
+        }
 
+        GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
 
         //Remove DistanceComponent
         foreach (GameEntity e in entitiesArray)
@@ -57,8 +65,39 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
         Clear();
     }
 
-    private void FindPath(GameEntity[] entities)
+
+    public void Initialize()
     {
+        //Get all hexes
+        var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
+
+
+        _spawnpoint = entitiesArray[0];
+        _target = entitiesArray[9 * _rows + 9];
+        Debug.Log(entitiesArray[3 * _rows + 3]);
+        Vector3 targetPos = _target.worldPos.Position;
+
+        foreach (GameEntity e in entitiesArray)
+        {
+            Vector3 localPos = e.worldPos.Position;
+            e.AddDistance(Vector3.Distance(localPos, targetPos));
+        }
+
+        GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
+
+
+        //Remove DistanceComponent
+        foreach (GameEntity e in entitiesArray)
+        {
+            e.RemoveDistance();
+        }
+    }
+
+
+    private List<GameEntity> FindPath(GameEntity[] entities, GameEntity startPosition)
+    {
+        List<GameEntity> finalPath = new List<GameEntity>();
+
         var _tileArray = entities;
 
         foreach (var e in _tileArray)
@@ -88,7 +127,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
         bool[] visited = new bool[_tileArray.Length];
 
         //Start van de start positie
-        GameEntity start = _spawnpoint;
+        GameEntity start = startPosition;
         queue.Enqueue(start); //2b
         pathValues[start] = 0;
 
@@ -112,16 +151,20 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
             if (current == _target)
             {
                 found = true;
-                Debug.Log("Found It");
             }
         }
 
         GameEntity pathPart = _target;
-        while (pathPart != _spawnpoint)
+        while (pathPart != startPosition)
         {
             pathPart.view.View.GetComponent<Renderer>().material.color = Color.red;
+            finalPath.Add(pathPart);
             pathPart = parents[pathPart];
         }
+
+        finalPath.Reverse();
+
+        return finalPath;
 
     }
 

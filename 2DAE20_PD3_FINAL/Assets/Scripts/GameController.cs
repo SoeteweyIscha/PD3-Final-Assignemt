@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Entitas;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -15,9 +16,10 @@ public class GameController : MonoBehaviour {
     //Bascis needed for behind the scenes
     private Systems _systems;
 
+    //Globals
+    public static List<GameEntity> StartPath = new List<GameEntity>();
 
-    
-    
+
     public Building BuildingState
     {
         get { return _buildingState; }
@@ -31,22 +33,39 @@ public class GameController : MonoBehaviour {
         _systems = CreateSystems( contexts );
 
         _systems.Initialize();
-	}
+
+        var entity = contexts.game.CreateEntity();
+
+        entity.AddGridPos(0, 0);
+        entity.AddWorldPos(0, 0, 0);
+        entity.AddHealth(1);
+        entity.AddPath(0, StartPath);
+        entity.isTargeting = true;
+
+        GameObject pre = Resources.Load<GameObject>("ShipPrefab");
+        GameObject temp = GameObject.Instantiate(pre);
+        entity.AddView(temp, temp.GetComponent<Renderer>().material.color);
+    }
 
     private void Update()
     {
         _systems.Execute();
+        
     }
 
     private Systems CreateSystems( Contexts contexts )
     {
         return new Feature("Game")
+
+            // INITIALISE
             .Add(new GridGenerationSystem(contexts, GridWidth, GridHeight))
             .Add(new GridViewSystem(contexts))
+
+            //EXECUTE & REACTIVE
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
             .Add(new TowerConstructorSystem(contexts))
-            .Add(new TargetingSystem(contexts, TestTarget))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
+            .Add(new TargetingSystem(contexts, TestTarget))
             ;
 
     }

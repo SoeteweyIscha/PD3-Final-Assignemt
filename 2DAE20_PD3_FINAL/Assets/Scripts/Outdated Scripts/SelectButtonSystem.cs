@@ -34,7 +34,7 @@ public class SelectButtonSystem : IExecuteSystem
             //Find closest clickable entity in scene
             foreach (var e in objects)
             {
-                Vector3 epos = new Vector3(e.worldPos.x, e.worldPos.y, e.worldPos.z);
+                Vector3 epos = e.worldPos.Position;
                 float distance = Vector3.Distance(mousePos, epos);
                 if (distance < shortestDist && distance < _maxSelectRange)
                 {

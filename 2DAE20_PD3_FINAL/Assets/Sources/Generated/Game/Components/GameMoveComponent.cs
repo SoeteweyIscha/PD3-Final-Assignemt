@@ -11,17 +11,19 @@ public partial class GameEntity {
     public MoveComponent move { get { return (MoveComponent)GetComponent(GameComponentsLookup.Move); } }
     public bool hasMove { get { return HasComponent(GameComponentsLookup.Move); } }
 
-    public void AddMove(int newSpeed) {
+    public void AddMove(int newSpeed, UnityEngine.Vector3 newDirection) {
         var index = GameComponentsLookup.Move;
         var component = CreateComponent<MoveComponent>(index);
         component.speed = newSpeed;
+        component.direction = newDirection;
         AddComponent(index, component);
     }
 
-    public void ReplaceMove(int newSpeed) {
+    public void ReplaceMove(int newSpeed, UnityEngine.Vector3 newDirection) {
         var index = GameComponentsLookup.Move;
         var component = CreateComponent<MoveComponent>(index);
         component.speed = newSpeed;
+        component.direction = newDirection;
         ReplaceComponent(index, component);
     }
 
