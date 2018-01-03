@@ -311,8 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd213a47618e5e49b0d066868aadba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridWidth: 5
-  GridHeight: 5
+  GridWidth: 10
+  GridHeight: 10
   MaxSelectDist: 12.14
   _buildingState: 0
   TestTarget: {fileID: 1575429865}

@@ -33,24 +33,54 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
     {
         //Get all hexes
         var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
+
+
+        _spawnpoint = entitiesArray[0];
+        _target = entitiesArray[9 * _rows + 9];
+        Debug.Log( entitiesArray[3 * _rows + 3]);
+        Vector3 targetPos = new Vector3(_target.worldPos.x, _target.worldPos.y, _target.worldPos.z); 
+
+        foreach (GameEntity e in entitiesArray)
+        {
+            Vector3 localPos = new Vector3(e.worldPos.x, e.worldPos.y, e.worldPos.z);
+            e.AddDistance( Vector3.Distance(localPos, targetPos));
+        }
+
         FindPath(entitiesArray);
+
+
+        //Remove DistanceComponent
+        foreach (GameEntity e in entitiesArray)
+        {
+            e.RemoveDistance();
+        }
         Clear();
     }
 
     private void FindPath(GameEntity[] entities)
     {
         var _tileArray = entities;
+
         foreach (var e in _tileArray)
         {
             e.view.View.GetComponent<Renderer>().material.color = e.view.BaseColor;
         }
-        
 
-        _spawnpoint = _tileArray[0];
-        _target = _tileArray[9 * _rows + 9];
-        Debug.Log(_tileArray[3 * _rows + 3]);
+        Dictionary<GameEntity, float> pathValues = new Dictionary<GameEntity, float>();
 
-        Queue<GameEntity> queue = new Queue<GameEntity>(); //1. backstack
+        PriorityQueue<GameEntity> queue = new PriorityQueue<GameEntity>((left, right) =>
+        {
+            //var distance1 = Mathf.Sqrt(Mathf.Pow(left.Row - _endCell.Row, 2) + Mathf.Pow(left.Column - _endCell.Column,2));
+            //var distance2 = Mathf.Sqrt(Mathf.Pow(right.Row - _endCell.Row, 2) + Mathf.Pow(right.Column - _endCell.Column, 2));
+
+            //return distance1.CompareTo(distance2);
+
+            return pathValues[left].CompareTo(pathValues[right]);
+
+        });
+
+
+        //Queue<GameEntity> queue = new Queue<GameEntity>(); //1. backstack
 
         Dictionary<GameEntity, GameEntity> parents = new Dictionary<GameEntity, GameEntity>();
 
@@ -60,6 +90,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
         //Start van de start positie
         GameEntity start = _spawnpoint;
         queue.Enqueue(start); //2b
+        pathValues[start] = 0;
 
         bool found = false;
         while (queue.Count > 0 && !found) // 3 loop doorheen de stack
@@ -69,6 +100,8 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
             var unvisitedNeighbours = FilterNeighbours(current, visited, _tileArray);
             foreach (var neighbour in unvisitedNeighbours)
             {
+
+                pathValues[neighbour] = pathValues[current] + neighbour.distance.Distance;
                 queue.Enqueue(neighbour);
                 parents[neighbour] = current;
 
@@ -80,8 +113,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>
             {
                 found = true;
                 Debug.Log("Found It");
-                Debug.Log(queue.Count);
-                foreach (var e in queue);
             }
         }
 
