@@ -5,28 +5,36 @@ public class TargetingSystem : IExecuteSystem
 {
     private Contexts _contexts;
     private IGroup<GameEntity> _entities;
+    private int _range;
 
-    private Transform _target;
-
-    public TargetingSystem( Contexts contexts, Transform target)
+    public TargetingSystem( Contexts contexts, int range)
     {
         _contexts = contexts;
-        _target = target;
-
+        _range = range;
     }
 
     public void Execute()
     {
-        _entities = _contexts.game.GetGroup(GameMatcher.Targeting);
+        //All gameEntities with targetComponent
+        var objects = _contexts.game.GetEntities(GameMatcher.Targeting);
 
-        var objects = _entities.GetEntities();
+        var enemies = _contexts.game.GetEntities(GameMatcher.Enemy);
 
-        
         foreach (GameEntity e in objects)
         {
-            e.view.View.transform.LookAt(_target);
+            if (e.isEnemy)
+                //look in movement directio
+                e.view.View.transform.LookAt(e.path.Path[e.path.CurrentNode].vectorPos.Position);
+            else
+            {
+                foreach (var enemy in enemies)
+                {
+                    Vector3 offset = e.baseTile.tile.vectorPos.Position - enemy.vectorPos.Position;
+                    float sqrLen = offset.sqrMagnitude;
+                    if (sqrLen < _range * _range)
+                        e.view.View.transform.LookAt(enemy.vectorPos.Position);
+                }
+            }
         }
-
-        _entities = null;
     }
 }

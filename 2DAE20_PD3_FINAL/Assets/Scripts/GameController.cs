@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     //Game variables, these influence the game
+    public int TurretRange = 5;
     public int GridWidth;
     public int GridHeight;
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
@@ -36,11 +37,13 @@ public class GameController : MonoBehaviour {
 
         var entity = contexts.game.CreateEntity();
 
+        entity.isEnemy = true;
         entity.AddGridPos(0, 0);
         entity.AddVectorPos(Vector3.zero);
         entity.AddHealth(1);
         entity.AddPath(0, StartPath);
         entity.isTargeting = true;
+        entity.AddMove(1, Vector3.zero);
 
         GameObject pre = Resources.Load<GameObject>("ShipPrefab");
         GameObject temp = GameObject.Instantiate(pre);
@@ -65,7 +68,9 @@ public class GameController : MonoBehaviour {
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
             .Add(new TowerConstructorSystem(contexts))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
-            .Add(new TargetingSystem(contexts, TestTarget))
+            .Add(new TargetingSystem(contexts, TurretRange))
+            .Add(new EnemyMovementSystem(contexts))
+            .Add(new MoveSystem(contexts))
             ;
 
     }

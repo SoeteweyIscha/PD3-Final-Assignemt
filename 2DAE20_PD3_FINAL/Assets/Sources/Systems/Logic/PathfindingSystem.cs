@@ -30,6 +30,8 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         return entity.isHex;
     }
 
+
+    // EXECUTE
     protected override void Execute(List<GameEntity> entities)
     {
         //Get all hexes
@@ -52,6 +54,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             foreach (GameEntity enemy in enemiesArray)
             {
                 enemy.ReplacePath(0, FindPath(entitiesArray, enemy));
+                enemy.move.direction = CalculatedDirection(enemy.path.Path[0], enemy);
             }
         }
 
@@ -65,7 +68,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         Clear();
     }
 
-
+    // INIT
     public void Initialize()
     {
         //Get all hexes
@@ -77,6 +80,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         Debug.Log(entitiesArray[3 * _rows + 3]);
         Vector3 targetPos = _target.vectorPos.Position;
 
+        //Add DistanceComponent
         foreach (GameEntity e in entitiesArray)
         {
             Vector3 localPos = e.vectorPos.Position;
@@ -109,11 +113,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
         PriorityQueue<GameEntity> queue = new PriorityQueue<GameEntity>((left, right) =>
         {
-            //var distance1 = Mathf.Sqrt(Mathf.Pow(left.Row - _endCell.Row, 2) + Mathf.Pow(left.Column - _endCell.Column,2));
-            //var distance2 = Mathf.Sqrt(Mathf.Pow(right.Row - _endCell.Row, 2) + Mathf.Pow(right.Column - _endCell.Column, 2));
-
-            //return distance1.CompareTo(distance2);
-
             return pathValues[left].CompareTo(pathValues[right]);
 
         });
@@ -157,7 +156,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         GameEntity pathPart = _target;
         while (pathPart != startPosition)
         {
-            pathPart.view.View.GetComponent<Renderer>().material.color = Color.red;
             finalPath.Add(pathPart);
             pathPart = parents[pathPart];
         }
@@ -259,6 +257,18 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         }
 
         return UnvisitedNeighbours;
+    }
+
+    private Vector3 CalculatedDirection(GameEntity target, GameEntity start)
+    {
+        Vector3 direction;
+
+        Vector3 targetPos = target.vectorPos.Position;
+        Vector3 startPos = start.vectorPos.Position;
+
+        direction = (targetPos - startPos).normalized;
+
+        return direction; 
     }
 
 }
