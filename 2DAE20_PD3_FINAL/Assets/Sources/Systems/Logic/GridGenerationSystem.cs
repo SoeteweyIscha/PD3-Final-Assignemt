@@ -20,17 +20,20 @@ public class GridGenerationSystem : IInitializeSystem {
 
     public void Initialize()
     {
+        Vector3 TargetPos = new Vector3((_width - 1) * _widthOffSet, 0, (_height - 1) * _heightOffSet);
         for (int w = 0; w < _width; w++)
         {
             for (int h = 0; h < _height; h++)
             {
-
+                
                 // Create entities 
                 var entity = _context.game.CreateEntity();
                 entity.AddGridPos(w, h);
 
+                
                 // Give the entities a vectorPos, using modulo function to give correct offset
                 entity.AddVectorPos(new Vector3(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2));
+                entity.AddDistance(Vector3.Distance(TargetPos, entity.vectorPos.Position));
                 entity.isHex = true;
                 entity.isWalkAble = true;
                 entity.isClick = true;
