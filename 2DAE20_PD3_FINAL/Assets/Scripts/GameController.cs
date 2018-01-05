@@ -5,16 +5,19 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     //Game variables, these influence the game
-    public int TurretRange = 5;
+
     public int GridWidth;
     public int GridHeight;
+    public int TurretRange = 5;
+
+    public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
                                 // this value is given to the SelectButtonSystem
     
     public Building _buildingState; // Public for testing
     public Transform TestTarget; //public for testing
 
-    //Bascis needed for behind the scenes
+    //Bascics needed for behind the scenes
     private Systems _systems;
 
     //Globals
@@ -68,6 +71,7 @@ public class GameController : MonoBehaviour {
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
             .Add(new TowerConstructorSystem(contexts))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
+            .Add(new RockGenerationSystem(contexts, RocksVariable))
             .Add(new TargetingSystem(contexts, TurretRange))
             .Add(new EnemyMovementSystem(contexts))
             .Add(new MoveSystem(contexts))
@@ -78,7 +82,7 @@ public class GameController : MonoBehaviour {
     public enum Building
     {
         Tower = 0,
-        Wall = 1
+        Wall = 1,
     }
 
 

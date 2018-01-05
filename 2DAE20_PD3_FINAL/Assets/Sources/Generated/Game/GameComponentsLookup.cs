@@ -18,14 +18,12 @@ public static class GameComponentsLookup {
     public const int Hex = 7;
     public const int Move = 8;
     public const int Path = 9;
-    public const int Selected = 10;
-    public const int Targeting = 11;
-    public const int VectorPos = 12;
-    public const int View = 13;
-    public const int WalkAble = 14;
-    public const int WorldPos = 15;
+    public const int Targeting = 10;
+    public const int VectorPos = 11;
+    public const int View = 12;
+    public const int WalkAble = 13;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "BaseTile",
@@ -38,12 +36,10 @@ public static class GameComponentsLookup {
         "Hex",
         "Move",
         "Path",
-        "Selected",
         "Targeting",
         "VectorPos",
         "View",
-        "WalkAble",
-        "WorldPos"
+        "WalkAble"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -57,11 +53,9 @@ public static class GameComponentsLookup {
         typeof(HexComponent),
         typeof(MoveComponent),
         typeof(PathComponent),
-        typeof(SelectedComponent),
         typeof(TargetingComponent),
         typeof(VectorPosComponent),
         typeof(ViewComponent),
-        typeof(WalkAble),
-        typeof(WorldPosComponent)
+        typeof(WalkAble)
     };
 }

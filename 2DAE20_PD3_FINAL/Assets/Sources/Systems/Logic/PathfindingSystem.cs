@@ -47,7 +47,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             var enemiesArray = _contexts.game.GetEntities(GameMatcher.Enemy);
 
             _spawnpoint = entitiesArray[0];
-            _target = entitiesArray[9 * _rows + 9];
+            _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
             Vector3 targetPos = _target.vectorPos.Position;
 
             if (enemiesArray != null)
@@ -72,8 +72,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
 
         _spawnpoint = entitiesArray[0];
-        _target = entitiesArray[9 * _rows + 9];
-        Debug.Log(entitiesArray[3 * _rows + 3]);
+        _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
         Vector3 targetPos = _target.vectorPos.Position;
 
         GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
@@ -119,6 +118,8 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             {
 
                 pathValues[neighbour] = pathValues[current] + neighbour.distance.Distance;
+                if (neighbour.hasBuiding)
+                    pathValues[neighbour] += 200;
                 queue.Enqueue(neighbour);
                 parents[neighbour] = current;
 
@@ -127,29 +128,29 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             visited[ current.gridPos.x * _rows + current.gridPos.y] = true;
 
 
-            if (queue.Count == 0 && current != _target)
-            {
-                Debug.Log(queue.Count);
-                //Find first blockade
-                var currentPath = GameController.StartPath;
-                currentPath.Reverse();
-                foreach (var e in currentPath)
-                {
-                    //Set Blockade as target
-                    if (e.hasBuiding)
-                        _target = e;
-                }
-                _target.isWalkAble = true;
-
-                //Reinitialise pathfinding
-                pathValues.Clear();
-                parents.Clear();
-                visited = new bool[_tileArray.Length];
-                start = startPosition;
-                queue.Enqueue(start);
-                pathValues[start] = 0;
-
-            }
+           // if (queue.Count == 0 && current != _target)
+           // {
+           //     Debug.Log(queue.Count);
+           //     //Find first blockade
+           //     var currentPath = GameController.StartPath;
+           //     currentPath.Reverse();
+           //     foreach (var e in currentPath)
+           //     {
+           //         //Set Blockade as target
+           //         if (e.hasBuiding)
+           //             _target = e;
+           //     }
+           //     _target.isWalkAble = true;
+           //
+           //     //Reinitialise pathfinding
+           //     pathValues.Clear();
+           //     parents.Clear();
+           //     visited = new bool[_tileArray.Length];
+           //     start = startPosition;
+           //     queue.Enqueue(start);
+           //     pathValues[start] = 0;
+           //
+           // }
 
             if (current == _target)
             {
@@ -191,7 +192,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             }
 
             arrayPos = (column - 1) * _rows + row + 1;
-            if (row < _rows - 1 && !visited[arrayPos] & tileArray[arrayPos].isWalkAble)
+            if (row < _rows - 1 && !visited[arrayPos] && tileArray[arrayPos].isWalkAble)
             {
                 UnvisitedNeighbours.Add(tileArray[arrayPos]);
             }
@@ -231,13 +232,13 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             }
 
             arrayPos = (column - 1) * _rows + row;
-            if (column > 0 && !visited[arrayPos] & tileArray[arrayPos].isWalkAble)
+            if (column > 0 && !visited[arrayPos] && tileArray[arrayPos].isWalkAble)
             {
                 UnvisitedNeighbours.Add(tileArray[arrayPos]);
             }
 
             arrayPos = (column + 1) * _rows + row - 1;
-            if (column < _columns - 1 && row > _rows && column < _columns && !visited[arrayPos] && tileArray[arrayPos].isWalkAble)
+            if (column < _columns - 1 && row > _rows && column < _columns && !visited[arrayPos])
             {
                 UnvisitedNeighbours.Add(tileArray[arrayPos]);
             }

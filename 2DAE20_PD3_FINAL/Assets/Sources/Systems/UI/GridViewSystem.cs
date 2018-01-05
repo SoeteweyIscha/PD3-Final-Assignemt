@@ -18,7 +18,7 @@ public class GridViewSystem : IInitializeSystem
 
         // Find tile prefab in Resources folder
         GameObject tile = Resources.Load<GameObject>("HexPrefab");
-        GameObject shell = new GameObject("Shell");
+        GameObject shell = new GameObject("HexShell");
         foreach (var e in renderTiles)
         {
             Vector3 pos = e.vectorPos.Position;

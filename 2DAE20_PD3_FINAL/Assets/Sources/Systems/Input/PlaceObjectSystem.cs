@@ -60,7 +60,6 @@ public class PlaceObjectSystem : IExecuteSystem
             if (closest != null)
             {
                 closest.AddBuiding(_stateToSet);
-                closest.isWalkAble = false;
                 closest.isClick = false;
             }
 
