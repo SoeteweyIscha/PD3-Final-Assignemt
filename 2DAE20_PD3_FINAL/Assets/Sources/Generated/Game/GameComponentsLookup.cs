@@ -10,24 +10,28 @@ public static class GameComponentsLookup {
 
     public const int BaseTile = 0;
     public const int Buiding = 1;
-    public const int Click = 2;
-    public const int Distance = 3;
-    public const int Enemy = 4;
-    public const int GridPos = 5;
-    public const int Health = 6;
-    public const int Hex = 7;
-    public const int Move = 8;
-    public const int Path = 9;
-    public const int Targeting = 10;
-    public const int VectorPos = 11;
-    public const int View = 12;
-    public const int WalkAble = 13;
+    public const int Bullet = 2;
+    public const int Click = 3;
+    public const int Distance = 4;
+    public const int Enemy = 5;
+    public const int GridPos = 6;
+    public const int Health = 7;
+    public const int Hex = 8;
+    public const int Move = 9;
+    public const int Path = 10;
+    public const int Shoot = 11;
+    public const int Targeting = 12;
+    public const int Timer = 13;
+    public const int VectorPos = 14;
+    public const int View = 15;
+    public const int WalkAble = 16;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "BaseTile",
         "Buiding",
+        "Bullet",
         "Click",
         "Distance",
         "Enemy",
@@ -36,7 +40,9 @@ public static class GameComponentsLookup {
         "Hex",
         "Move",
         "Path",
+        "Shoot",
         "Targeting",
+        "Timer",
         "VectorPos",
         "View",
         "WalkAble"
@@ -45,6 +51,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(BaseTileComponent),
         typeof(BuidingComponent),
+        typeof(BulletComponent),
         typeof(ClickComponent),
         typeof(DistanceComponent),
         typeof(EnemyComponent),
@@ -53,7 +60,9 @@ public static class GameComponentsLookup {
         typeof(HexComponent),
         typeof(MoveComponent),
         typeof(PathComponent),
+        typeof(ShootComponent),
         typeof(TargetingComponent),
+        typeof(TimerComponent),
         typeof(VectorPosComponent),
         typeof(ViewComponent),
         typeof(WalkAble)

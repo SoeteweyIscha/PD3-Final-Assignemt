@@ -242,6 +242,7 @@
   <ItemGroup>
     <Compile Include="Assets\Sources\Generated\Game\Components\GameBaseTileComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameBuidingComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameBulletComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameClickComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameDistanceComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyComponent.cs" />
@@ -250,7 +251,9 @@
     <Compile Include="Assets\Sources\Generated\Game\Components\GameHexComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameMoveComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GamePathComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameShootComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameTargetingComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameTimerComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameVectorPosComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameViewComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameWalkAbleComponent.cs" />
@@ -265,8 +268,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\General\PriorityQueue.cs" />
+    <Compile Include="Assets\Scripts\General\StaticFunctions.cs" />
     <Compile Include="Assets\Sources\Components\BaseTileComponent.cs" />
     <Compile Include="Assets\Sources\Components\BuidingComponent.cs" />
+    <Compile Include="Assets\Sources\Components\BulletComponent.cs" />
     <Compile Include="Assets\Sources\Components\ClickComponent.cs" />
     <Compile Include="Assets\Sources\Components\DistanceComponent.cs" />
     <Compile Include="Assets\Sources\Components\EnemyComponent.cs" />
@@ -275,7 +280,9 @@
     <Compile Include="Assets\Sources\Components\HexComponent.cs" />
     <Compile Include="Assets\Sources\Components\MoveComponent.cs" />
     <Compile Include="Assets\Sources\Components\PathComponent.cs" />
+    <Compile Include="Assets\Sources\Components\ShootComponent.cs" />
     <Compile Include="Assets\Sources\Components\TargetingComponent.cs" />
+    <Compile Include="Assets\Sources\Components\TimerComponent.cs" />
     <Compile Include="Assets\Sources\Components\VectorPosComponent.cs" />
     <Compile Include="Assets\Sources\Components\ViewComponent.cs" />
     <Compile Include="Assets\Sources\Components\WalkAbleComponent.cs" />
@@ -286,7 +293,9 @@
     <Compile Include="Assets\Sources\Systems\Logic\MoveSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\PathfindingSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\RockGenerationSystem.cs" />
+    <Compile Include="Assets\Sources\Systems\Logic\ShootSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\TargetingSystem.cs" />
+    <Compile Include="Assets\Sources\Systems\Logic\TimerSystem.cs" />
     <Compile Include="Assets\Sources\Systems\UI\GridViewSystem.cs" />
     <Compile Include="Assets\Sources\Systems\UI\TowerConstructorSystem.cs" />
     <Compile Include="Assets\ThirdParty\Entitas\Compile.cs" />

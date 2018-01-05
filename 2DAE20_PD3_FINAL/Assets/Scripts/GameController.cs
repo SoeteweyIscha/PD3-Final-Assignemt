@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
     public int GridWidth;
     public int GridHeight;
     public int TurretRange = 5;
+    static public float TurretReloadTime = 1.5f;
+    public GameObject Bullet;
 
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
@@ -69,12 +71,14 @@ public class GameController : MonoBehaviour {
 
             //EXECUTE & REACTIVE
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
-            .Add(new TowerConstructorSystem(contexts))
+            .Add(new TowerConstructorSystem(contexts, TurretReloadTime))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
             .Add(new RockGenerationSystem(contexts, RocksVariable))
-            .Add(new TargetingSystem(contexts, TurretRange))
             .Add(new EnemyMovementSystem(contexts))
             .Add(new MoveSystem(contexts))
+            .Add(new TargetingSystem(contexts, TurretRange))
+            .Add(new TimerSystem(contexts))
+            .Add(new ShootSystem(contexts, TurretRange, Bullet))
             ;
 
     }

@@ -48,7 +48,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
             _spawnpoint = entitiesArray[0];
             _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
-            Vector3 targetPos = _target.vectorPos.Position;
 
             if (enemiesArray != null)
             {
@@ -73,7 +72,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
         _spawnpoint = entitiesArray[0];
         _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
-        Vector3 targetPos = _target.vectorPos.Position;
 
         GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
     }

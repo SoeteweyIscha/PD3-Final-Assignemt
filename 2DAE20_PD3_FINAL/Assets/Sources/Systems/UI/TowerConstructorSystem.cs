@@ -7,10 +7,12 @@ using System.Runtime.Remoting.Contexts;
 public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
 
     private Contexts _contexts;
+    private float _turretReloadTime;
 
-    public TowerConstructorSystem(Contexts contexts) : base(contexts.game)
+    public TowerConstructorSystem(Contexts contexts, float turretReloadTime) : base(contexts.game)
     {
         _contexts = contexts;
+        _turretReloadTime = turretReloadTime;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -43,6 +45,7 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
                     tempView = GameObject.Instantiate(Resources.Load<GameObject>("Tower"), pos, Quaternion.identity);
                     temp.AddHealth(3);
                     temp.isTargeting = true;
+                    temp.AddTimer(0, _turretReloadTime);
                     break;
 
                 case GameController.Building.Wall:
