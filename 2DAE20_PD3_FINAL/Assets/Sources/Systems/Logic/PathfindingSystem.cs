@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 {
-
+    private bool recalculatePath = true;
     private Contexts _contexts;
     private GameEntity _spawnpoint;
     private GameEntity _target;
@@ -34,25 +34,34 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     // EXECUTE
     protected override void Execute(List<GameEntity> entities)
     {
-        //Get all hexes
-        var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
-        var enemiesArray = _contexts.game.GetEntities(GameMatcher.Enemy);
-
-        _spawnpoint = entitiesArray[0];
-        _target = entitiesArray[9 * _rows + 9];
-        Vector3 targetPos = _target.vectorPos.Position; 
-
-        if (enemiesArray != null)
+        foreach (var e in GameController.StartPath)
         {
-            foreach (GameEntity enemy in enemiesArray)
-            {
-                enemy.ReplacePath(0, FindPath(entitiesArray, enemy));
-                enemy.move.direction = CalculatedDirection(enemy.path.Path[0], enemy);
-            }
+            if (e.hasBuiding)
+                recalculatePath = true;
         }
 
-        GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
-        Clear();
+        if (recalculatePath == true)
+        {
+            //Get all hexes
+            var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
+            var enemiesArray = _contexts.game.GetEntities(GameMatcher.Enemy);
+
+            _spawnpoint = entitiesArray[0];
+            _target = entitiesArray[9 * _rows + 9];
+            Vector3 targetPos = _target.vectorPos.Position;
+
+            if (enemiesArray != null)
+            {
+                foreach (GameEntity enemy in enemiesArray)
+                {
+                    enemy.ReplacePath(0, FindPath(entitiesArray, enemy));
+                    enemy.move.direction = CalculatedDirection(enemy.path.Path[0], enemy);
+                }
+            }
+
+            GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
+            Clear();
+        }
     }
 
     // INIT
@@ -73,25 +82,22 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
     private List<GameEntity> FindPath(GameEntity[] entities, GameEntity startPosition)
     {
+        //The Path to return
         List<GameEntity> finalPath = new List<GameEntity>();
 
+        // Array of all tiles
         var _tileArray = entities;
 
-        foreach (var e in _tileArray)
-        {
-            e.view.View.GetComponent<Renderer>().material.color = e.view.BaseColor;
-        }
 
+        //Dictionary with pathvalues
         Dictionary<GameEntity, float> pathValues = new Dictionary<GameEntity, float>();
 
+        // BACKSTACK
         PriorityQueue<GameEntity> queue = new PriorityQueue<GameEntity>((left, right) =>
         {
             return pathValues[left].CompareTo(pathValues[right]);
 
         });
-
-
-        //Queue<GameEntity> queue = new Queue<GameEntity>(); //1. backstack
 
         Dictionary<GameEntity, GameEntity> parents = new Dictionary<GameEntity, GameEntity>();
 
@@ -120,11 +126,37 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
             visited[ current.gridPos.x * _rows + current.gridPos.y] = true;
 
+
+            if (queue.Count == 0 && current != _target)
+            {
+                Debug.Log(queue.Count);
+                //Find first blockade
+                var currentPath = GameController.StartPath;
+                currentPath.Reverse();
+                foreach (var e in currentPath)
+                {
+                    //Set Blockade as target
+                    if (e.hasBuiding)
+                        _target = e;
+                }
+                _target.isWalkAble = true;
+
+                //Reinitialise pathfinding
+                pathValues.Clear();
+                parents.Clear();
+                visited = new bool[_tileArray.Length];
+                start = startPosition;
+                queue.Enqueue(start);
+                pathValues[start] = 0;
+
+            }
+
             if (current == _target)
             {
                 found = true;
             }
         }
+
 
         GameEntity pathPart = _target;
         while (pathPart != startPosition)
@@ -134,6 +166,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         }
 
         finalPath.Reverse();
+        recalculatePath = false;
 
         return finalPath;
 
