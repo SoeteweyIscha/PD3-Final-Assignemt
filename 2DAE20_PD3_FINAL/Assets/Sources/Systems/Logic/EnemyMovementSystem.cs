@@ -9,7 +9,6 @@ public class EnemyMovementSystem : IExecuteSystem
 
     Contexts _contexts;
     private float _range = 0.05f;
-    private float _speed = 1; //Units per second
 
     public EnemyMovementSystem(Contexts contexts)
     {

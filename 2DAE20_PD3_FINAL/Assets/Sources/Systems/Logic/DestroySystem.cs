@@ -6,11 +6,8 @@ using UnityEngine;
 public class DestroySystem : ReactiveSystem <GameEntity>
 {
 
-    Contexts _contexts;
-
     public DestroySystem(Contexts contexts) : base(contexts.game)
     {
-        _contexts = contexts;
     }
 
     protected override bool Filter(GameEntity entity)

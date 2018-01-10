@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameController : MonoBehaviour {
 
@@ -8,8 +9,10 @@ public class GameController : MonoBehaviour {
 
     public int GridWidth;
     public int GridHeight;
-    public int TurretRange = 5;
+    public int TurretRange = 2;
     static public float TurretReloadTime = 1.5f;
+    static public int Money = 100;
+    public int publicMoney;
     public GameObject Bullet;
 
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
@@ -21,6 +24,9 @@ public class GameController : MonoBehaviour {
 
     //Bascics needed for behind the scenes
     private Systems _systems;
+    private Contexts _gameContext;
+
+    private bool _coroutineStarted = false;
 
     //Globals
     public static List<GameEntity> StartPath = new List<GameEntity>();
@@ -36,29 +42,23 @@ public class GameController : MonoBehaviour {
     {
         var contexts = Contexts.sharedInstance;
 
+        _gameContext = contexts;
+
         _systems = CreateSystems( contexts );
 
         _systems.Initialize();
-
-        var entity = contexts.game.CreateEntity();
-
-        entity.isEnemy = true;
-        entity.AddGridPos(0, 0);
-        entity.AddVectorPos(Vector3.zero);
-        entity.AddHealth(1);
-        entity.AddPath(0, StartPath);
-        entity.isTargeting = true;
-        entity.AddMove(1, Vector3.zero);
-
-        GameObject pre = Resources.Load<GameObject>("ShipPrefab");
-        GameObject temp = GameObject.Instantiate(pre);
-        entity.AddView(temp, temp.GetComponent<Renderer>().material.color);
     }
 
     private void Update()
     {
         _systems.Execute();
-        
+        publicMoney = Money;
+
+        if (!_coroutineStarted)
+        {
+            StartCoroutine("CreateEnemies");
+            _coroutineStarted = true;
+        }
     }
 
     private Systems CreateSystems( Contexts contexts )
@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour {
             .Add(new GridViewSystem(contexts))
 
             //EXECUTE & REACTIVE
+            .Add(new EnemyBuilderSystem(contexts))
             .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
             .Add(new TowerConstructorSystem(contexts, TurretReloadTime))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
@@ -91,5 +92,14 @@ public class GameController : MonoBehaviour {
         Wall = 1,
     }
 
+    public IEnumerator CreateEnemies()
+    {
+        for (;;)
+        {
+            GameEntity spawner = _gameContext.game.CreateEntity();
+            spawner.isBuildEnemy = true;
+            yield return new WaitForSeconds(1.5f);
+        }
+    }
 
 }

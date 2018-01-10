@@ -57,8 +57,9 @@ public class PlaceObjectSystem : IExecuteSystem
 
 
             //Prepares the tile for a an object to be place upon it
-            if (closest != null)
+            if (closest != null && GameController.Money >= 50)
             {
+                GameController.Money -= 50;
                 closest.AddBuiding(_stateToSet);
                 closest.isClick = false;
             }

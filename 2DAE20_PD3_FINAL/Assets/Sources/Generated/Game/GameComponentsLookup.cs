@@ -10,28 +10,30 @@ public static class GameComponentsLookup {
 
     public const int BaseTile = 0;
     public const int Buiding = 1;
-    public const int Bullet = 2;
-    public const int Click = 3;
-    public const int Destroy = 4;
-    public const int Distance = 5;
-    public const int Enemy = 6;
-    public const int GridPos = 7;
-    public const int Health = 8;
-    public const int Hex = 9;
-    public const int Move = 10;
-    public const int Path = 11;
-    public const int Shoot = 12;
-    public const int Targeting = 13;
-    public const int Timer = 14;
-    public const int VectorPos = 15;
-    public const int View = 16;
-    public const int WalkAble = 17;
+    public const int BuildEnemy = 2;
+    public const int Bullet = 3;
+    public const int Click = 4;
+    public const int Destroy = 5;
+    public const int Distance = 6;
+    public const int Enemy = 7;
+    public const int GridPos = 8;
+    public const int Health = 9;
+    public const int Hex = 10;
+    public const int Move = 11;
+    public const int Path = 12;
+    public const int Shoot = 13;
+    public const int Targeting = 14;
+    public const int Timer = 15;
+    public const int VectorPos = 16;
+    public const int View = 17;
+    public const int WalkAble = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "BaseTile",
         "Buiding",
+        "BuildEnemy",
         "Bullet",
         "Click",
         "Destroy",
@@ -53,6 +55,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(BaseTileComponent),
         typeof(BuidingComponent),
+        typeof(BuildEnemyComponent),
         typeof(BulletComponent),
         typeof(ClickComponent),
         typeof(DestroyComponent),

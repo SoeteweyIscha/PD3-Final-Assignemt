@@ -4,42 +4,50 @@ using UnityEngine;
 using Entitas;
 using System;
 
-public class EnemyBuilder : ReactiveSystem<GameEntity>
+public class EnemyBuilderSystem : ReactiveSystem<GameEntity>
 {
-    Contexts _contexts;
+    private Contexts _contexts;
 
-    public EnemyBuilder(Contexts contexts) : base(contexts.game)
+    public EnemyBuilderSystem(Contexts contexts) : base(contexts.game)
     {
-
+        _contexts = contexts;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        throw new NotImplementedException();
+        return context.CreateCollector(GameMatcher.BuildEnemy);
     }
 
 
     protected override bool Filter(GameEntity entity)
     {
-        throw new NotImplementedException();
+        return entity.isBuildEnemy;
     }
 
 
     protected override void Execute(List<GameEntity> entities)
     {
-        var entity = _contexts.game.CreateEntity();
+        var builders = _contexts.game.GetEntities(GameMatcher.BuildEnemy);
 
-        entity.AddGridPos(0, 0);
-        entity.AddVectorPos(Vector3.zero);
-        entity.AddHealth(1);
-        entity.AddPath(0, GameController.StartPath);
+        foreach (var e in builders)
+        {
+            var entity = _contexts.game.CreateEntity();
 
-        GameObject  pre = Resources.Load<GameObject>("ShipPrefab");
-        GameObject temp = GameObject.Instantiate(pre);
-        entity.AddView(temp, temp.GetComponent<Renderer>().material.color);
-            
-            
+            entity.isEnemy = true;
+            entity.AddGridPos(0, 0);
+            entity.AddVectorPos(Vector3.zero);
+            entity.AddHealth(1);
+            entity.AddPath(0, GameController.StartPath);
+            entity.isTargeting = true;
+            entity.AddMove(1, Vector3.zero);
 
+            GameObject pre = Resources.Load<GameObject>("ShipPrefab");
+            GameObject temp = GameObject.Instantiate(pre);
+            entity.AddView(temp, temp.GetComponent<Renderer>().material.color);
+
+            e.Destroy();
+        }
+        Clear();
     }
 
 }

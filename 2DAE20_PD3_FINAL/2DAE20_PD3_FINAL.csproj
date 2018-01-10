@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -240,31 +240,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\General\PriorityQueue.cs" />
-    <Compile Include="Assets\Scripts\General\StaticFunctions.cs" />
-    <Compile Include="Assets\Sources\Components\BaseTileComponent.cs" />
-    <Compile Include="Assets\Sources\Components\BuidingComponent.cs" />
-    <Compile Include="Assets\Sources\Components\BulletComponent.cs" />
-    <Compile Include="Assets\Sources\Components\ClickComponent.cs" />
-    <Compile Include="Assets\Sources\Components\DestroyComponent.cs" />
-    <Compile Include="Assets\Sources\Components\DistanceComponent.cs" />
-    <Compile Include="Assets\Sources\Components\EnemyComponent.cs" />
-    <Compile Include="Assets\Sources\Components\GridPosComponent.cs" />
-    <Compile Include="Assets\Sources\Components\HealthComponent.cs" />
-    <Compile Include="Assets\Sources\Components\HexComponent.cs" />
-    <Compile Include="Assets\Sources\Components\MoveComponent.cs" />
-    <Compile Include="Assets\Sources\Components\PathComponent.cs" />
-    <Compile Include="Assets\Sources\Components\ShootComponent.cs" />
-    <Compile Include="Assets\Sources\Components\TargetingComponent.cs" />
-    <Compile Include="Assets\Sources\Components\TimerComponent.cs" />
-    <Compile Include="Assets\Sources\Components\VectorPosComponent.cs" />
-    <Compile Include="Assets\Sources\Components\ViewComponent.cs" />
-    <Compile Include="Assets\Sources\Components\WalkAbleComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Contexts.cs" />
-    <Compile Include="Assets\Sources\Generated\Feature.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameBaseTileComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameBuidingComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameBuildEnemyComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameBulletComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameClickComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyComponent.cs" />
@@ -281,11 +259,37 @@
     <Compile Include="Assets\Sources\Generated\Game\Components\GameVectorPosComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameViewComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameWalkAbleComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameContext.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameMatcher.cs" />
+    <Compile Include="Assets\Sources\Generated\Contexts.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Feature.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\General\PriorityQueue.cs" />
+    <Compile Include="Assets\Scripts\General\StaticFunctions.cs" />
+    <Compile Include="Assets\Sources\Components\BaseTileComponent.cs" />
+    <Compile Include="Assets\Sources\Components\BuidingComponent.cs" />
+    <Compile Include="Assets\Sources\Components\BuildEnemyComponent.cs" />
+    <Compile Include="Assets\Sources\Components\BulletComponent.cs" />
+    <Compile Include="Assets\Sources\Components\ClickComponent.cs" />
+    <Compile Include="Assets\Sources\Components\DestroyComponent.cs" />
+    <Compile Include="Assets\Sources\Components\DistanceComponent.cs" />
+    <Compile Include="Assets\Sources\Components\EnemyComponent.cs" />
+    <Compile Include="Assets\Sources\Components\GridPosComponent.cs" />
+    <Compile Include="Assets\Sources\Components\HealthComponent.cs" />
+    <Compile Include="Assets\Sources\Components\HexComponent.cs" />
+    <Compile Include="Assets\Sources\Components\MoveComponent.cs" />
+    <Compile Include="Assets\Sources\Components\PathComponent.cs" />
+    <Compile Include="Assets\Sources\Components\ShootComponent.cs" />
+    <Compile Include="Assets\Sources\Components\TargetingComponent.cs" />
+    <Compile Include="Assets\Sources\Components\TimerComponent.cs" />
+    <Compile Include="Assets\Sources\Components\VectorPosComponent.cs" />
+    <Compile Include="Assets\Sources\Components\ViewComponent.cs" />
+    <Compile Include="Assets\Sources\Components\WalkAbleComponent.cs" />
     <Compile Include="Assets\Sources\Systems\Input\PlaceObjectSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\ColliderSystem.cs" />
     <Compile Include="Assets\Sources\Systems\Logic\DestroySystem.cs" />

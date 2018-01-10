@@ -28,6 +28,7 @@ public class ColliderSystem : IExecuteSystem {
                 float range = StaticFunctions.SqrDistance(enemyPos, bullet.vectorPos.Position);
                 if (range < _detectionRange * _detectionRange && !bullet.isDestroy)
                 {
+                    GameController.Money += 10;
                     bullet.isDestroy = true;
                     enemy.isDestroy = true;
                     break;
