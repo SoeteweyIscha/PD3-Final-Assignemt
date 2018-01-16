@@ -13,6 +13,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     private GameObject _hex;
     private GameObject _enemy;
     private GameObject _rock;
+    private GameObject _homeBase;
 
     //GameObjects to work as parents for the objects in the scene
     private GameObject _towerShell;
@@ -34,6 +35,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         _hex = Resources.Load<GameObject>("Hex");
         _enemy = Resources.Load<GameObject>("Ship");
         _rock = Resources.Load<GameObject>("Rock");
+        _homeBase = Resources.Load<GameObject>("Base");
 
         _towerShell = new GameObject("towerSHELL");
         _wallShell = new GameObject("wallSHELL");
@@ -51,7 +53,8 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                                                             GameMatcher.Tower, 
                                                             GameMatcher.Enemy, 
                                                             GameMatcher.Bullet, 
-                                                            GameMatcher.Rock)
+                                                            GameMatcher.Rock,
+                                                            GameMatcher.HomeBase)
                                                             );
     }
 
@@ -77,6 +80,13 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                 {
                     GameObject temp = GameObject.Instantiate(_wallModel, e.vectorPos.Position, Quaternion.identity, _wallShell.transform);
                     e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
+                }
+
+                else if (e.isHomeBase)
+                {
+                    GameObject temp = GameObject.Instantiate(_homeBase, e.vectorPos.Position, Quaternion.identity);
+                    e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
+                    Debug.Log("Passed this");
                 }
 
                 else if (e.isRock)

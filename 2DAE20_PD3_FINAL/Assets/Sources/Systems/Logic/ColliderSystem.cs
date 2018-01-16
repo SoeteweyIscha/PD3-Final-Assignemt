@@ -16,9 +16,11 @@ public class ColliderSystem : IExecuteSystem {
     {
         var enemies = _contexts.game.GetEntities(GameMatcher.Enemy);
 
-        var buildings = _contexts.game.GetEntities(GameMatcher.AnyOf(GameMatcher.Tower, GameMatcher.Wall));
+        var buildings = _contexts.game.GetEntities(GameMatcher.AnyOf(GameMatcher.Tower, GameMatcher.Wall, GameMatcher.HomeBase));
 
         var bullets = _contexts.game.GetEntities(GameMatcher.Bullet);
+
+        var homeBase = _contexts.game.GetEntities(GameMatcher.HomeBase);
 
         foreach (GameEntity enemy in enemies)
         {
@@ -28,9 +30,8 @@ public class ColliderSystem : IExecuteSystem {
                 float range = StaticFunctions.SqrDistance(enemyPos, bullet.vectorPos.Position);
                 if (range < _detectionRange * _detectionRange && !bullet.isDestroy)
                 {
-                    GameController.Money += 10;
                     bullet.isDestroy = true;
-                    enemy.isDestroy = true;
+                    enemy.health.Healthpoints -= 2;
                     break;
                 }
             }
@@ -45,10 +46,20 @@ public class ColliderSystem : IExecuteSystem {
                 if (range < _detectionRange * _detectionRange && enemy.isDestroy == false)
                 {
                     enemy.isDestroy = true;
-                    building.isDestroy = true;
+
+                    if (building.isHomeBase)
+                    {
+                        building.health.Healthpoints -= enemy.health.Healthpoints;
+                        Debug.Log("Homebase health: " + building.health.Healthpoints);
+                    }
+                    else
+                    {
+                        building.isDestroy = true;
+                    }
                     break;
                 } 
             }
         }
+
     }
 }

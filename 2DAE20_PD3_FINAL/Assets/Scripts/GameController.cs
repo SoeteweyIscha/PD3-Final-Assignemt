@@ -82,8 +82,8 @@ public class GameController : MonoBehaviour {
             .Add(new TimerSystem(contexts))
             .Add(new ShootSystem(contexts, TurretRange, Bullet))
             .Add(new ColliderSystem(contexts))
+            .Add(new HealthSystem(contexts))
             .Add(new DestroySystem(contexts))
-
             ;
 
     }

@@ -37,6 +37,13 @@ public class GridGenerationSystem : IInitializeSystem {
                 entity.isHex = true;
                 entity.isWalkAble = true;
                 entity.isClick = true;
+
+                if (w == _width-1 && h == _height-1)
+                {
+                    entity.isHomeBase = true;
+                    entity.isClick = false;
+                    entity.AddHealth(20);
+                }
             }
         }
     }
