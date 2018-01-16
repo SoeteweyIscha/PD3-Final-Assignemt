@@ -36,7 +36,7 @@ public class EnemyBuilderSystem : ReactiveSystem<GameEntity>
             entity.isEnemy = true;
             entity.AddGridPos(0, 0);
             entity.AddVectorPos(Vector3.zero);
-            entity.AddHealth(4);
+            entity.AddHealth(4, null);
             entity.AddPath(0, GameController.StartPath);
             entity.isTargeting = true;
             entity.AddMove(1, Vector3.zero);

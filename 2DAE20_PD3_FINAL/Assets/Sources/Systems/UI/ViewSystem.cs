@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
+using UnityEngine.UI;
 using System;
 
 public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
@@ -86,7 +87,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                 {
                     GameObject temp = GameObject.Instantiate(_homeBase, e.vectorPos.Position, Quaternion.identity);
                     e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
-                    Debug.Log("Passed this");
+                    e.health.Display = temp.GetComponentInChildren<Text>();
                 }
 
                 else if (e.isRock)
@@ -105,6 +106,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                 {
                     GameObject temp = GameObject.Instantiate(_enemy, e.vectorPos.Position, Quaternion.identity, _enemyShell.transform);
                     e.AddView(temp, temp.GetComponent<Renderer>().material.color);
+                    e.health.Display = temp.GetComponentInChildren<Text>();
                 }
             }
         }

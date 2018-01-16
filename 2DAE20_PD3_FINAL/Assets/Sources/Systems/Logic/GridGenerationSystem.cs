@@ -44,7 +44,7 @@ public class GridGenerationSystem : IInitializeSystem {
                 {
                     entity.isHomeBase = true;
                     entity.isClick = false;
-                    entity.AddHealth(20);
+                    entity.AddHealth(20, null);
                 }
             }
         }

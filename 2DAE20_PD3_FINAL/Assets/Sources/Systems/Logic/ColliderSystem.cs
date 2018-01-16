@@ -20,8 +20,6 @@ public class ColliderSystem : IExecuteSystem {
 
         var bullets = _contexts.game.GetEntities(GameMatcher.Bullet);
 
-        var homeBase = _contexts.game.GetEntities(GameMatcher.HomeBase);
-
         foreach (GameEntity enemy in enemies)
         {
             Vector3 enemyPos = enemy.vectorPos.Position;

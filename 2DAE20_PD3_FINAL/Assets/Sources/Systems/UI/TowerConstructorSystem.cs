@@ -43,14 +43,14 @@ public class TowerConstructorSystem : ReactiveSystem<GameEntity> {
             {
                 case GameController.Building.Tower:
                     tempView = GameObject.Instantiate(Resources.Load<GameObject>("Tower"), pos, Quaternion.identity);
-                    temp.AddHealth(3);
+                    //temp.AddHealth(3);
                     temp.isTargeting = true;
                     temp.AddTimer(0, _turretReloadTime);
                     break;
 
                 case GameController.Building.Wall:
                     tempView = GameObject.Instantiate(Resources.Load<GameObject>("Wall"), pos, Quaternion.identity);
-                    temp.AddHealth(6);
+                    //temp.AddHealth(6);
                     break;
             }
 

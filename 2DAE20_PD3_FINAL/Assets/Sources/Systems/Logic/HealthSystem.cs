@@ -19,6 +19,7 @@ public class HealthSystem : IExecuteSystem {
 
         foreach (var e in entities)
         {
+            e.health.Display.text = e.health.Healthpoints.ToString();
             if (e.health.Healthpoints <= 0)
             {
                 e.isDestroy = true;

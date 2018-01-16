@@ -72,7 +72,6 @@ public class PlaceObjectSystem : IExecuteSystem
                 {
                     case GameController.Building.Tower:
                         temp.isTower = true;
-                        temp.AddHealth(3);
                         temp.isTargeting = true;
                         temp.AddTimer(0, _turretReloadTime);
 
@@ -82,7 +81,6 @@ public class PlaceObjectSystem : IExecuteSystem
 
                     case GameController.Building.Wall:
                         temp.isWall = true;
-                        temp.AddHealth(6);
 
                         //Subtract Money
                         GameController.Money -= 40;
