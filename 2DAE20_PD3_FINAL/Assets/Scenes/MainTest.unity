@@ -362,7 +362,7 @@ MonoBehaviour:
   TurretRange: 5
   publicMoney: 0
   Bullet: {fileID: 1230923593475862, guid: a9e40806f92d09f49a2bd723cae2d564, type: 2}
-  RocksVariable: 50
+  RocksVariable: 0
   MaxSelectDist: 12.14
   _buildingState: 0
   TestTarget: {fileID: 1575429865}

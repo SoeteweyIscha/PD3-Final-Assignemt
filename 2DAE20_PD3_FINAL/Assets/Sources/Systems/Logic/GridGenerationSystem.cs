@@ -33,7 +33,9 @@ public class GridGenerationSystem : IInitializeSystem {
                 
                 // Give the entities a vectorPos, using modulo function to give correct offset
                 entity.AddVectorPos(new Vector3(w * _widthOffSet   , 0, h * _heightOffSet + w % 2 * _heightOffSet / 2));
-                entity.AddDistance(Vector3.Distance(TargetPos, entity.vectorPos.Position));
+                float dist = StaticFunctions.SqrDistance(Vector3.zero, entity.vectorPos.Position) + (w + h);
+                entity.AddDistance(dist);
+                Debug.Log(dist);
                 entity.isHex = true;
                 entity.isWalkAble = true;
                 entity.isClick = true;

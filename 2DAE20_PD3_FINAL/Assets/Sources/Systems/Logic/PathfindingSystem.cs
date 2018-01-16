@@ -117,38 +117,13 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
                 pathValues[neighbour] = pathValues[current] + neighbour.distance.Distance;
                 if (neighbour.hasBuiding)
-                    pathValues[neighbour] += 200;
+                    pathValues[neighbour] /= 4;
                 queue.Enqueue(neighbour);
                 parents[neighbour] = current;
 
             }
 
             visited[ current.gridPos.x * _rows + current.gridPos.y] = true;
-
-
-           // if (queue.Count == 0 && current != _target)
-           // {
-           //     Debug.Log(queue.Count);
-           //     //Find first blockade
-           //     var currentPath = GameController.StartPath;
-           //     currentPath.Reverse();
-           //     foreach (var e in currentPath)
-           //     {
-           //         //Set Blockade as target
-           //         if (e.hasBuiding)
-           //             _target = e;
-           //     }
-           //     _target.isWalkAble = true;
-           //
-           //     //Reinitialise pathfinding
-           //     pathValues.Clear();
-           //     parents.Clear();
-           //     visited = new bool[_tileArray.Length];
-           //     start = startPosition;
-           //     queue.Enqueue(start);
-           //     pathValues[start] = 0;
-           //
-           // }
 
             if (current == _target)
             {
