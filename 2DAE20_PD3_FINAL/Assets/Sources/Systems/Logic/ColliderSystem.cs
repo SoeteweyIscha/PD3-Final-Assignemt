@@ -1,19 +1,26 @@
 ﻿using System;
 using Entitas;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ColliderSystem : IExecuteSystem {
 
     private Contexts _contexts;
     private int _detectionRange = 1;
+    private int _rows;
+    private int _collums;
 
-    public ColliderSystem( Contexts contexts)
+    public ColliderSystem( Contexts contexts, int collumns, int rows )
     {
         _contexts = contexts;
+        _rows = rows;
+        _collums = collumns;
     }
 
     public void Execute()
     {
+        var Tiles = _contexts.game.GetEntities(GameMatcher.Hex);
+
         var enemies = _contexts.game.GetEntities(GameMatcher.Enemy);
 
         var buildings = _contexts.game.GetEntities(GameMatcher.AnyOf(GameMatcher.Tower, GameMatcher.Wall, GameMatcher.HomeBase));
@@ -53,6 +60,8 @@ public class ColliderSystem : IExecuteSystem {
                     else
                     {
                         building.isDestroy = true;
+                        Tiles[building.gridPos.x * _rows + building.gridPos.y].isClick = true;
+                        //current.gridPos.x* _rows +current.gridPos.y
                     }
                     break;
                 } 

@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour {
             .Add(new TargetingSystem(contexts, TurretRange))
             .Add(new TimerSystem(contexts))
             .Add(new ShootSystem(contexts, TurretRange, Bullet))
-            .Add(new ColliderSystem(contexts))
+            .Add(new ColliderSystem(contexts, GridWidth, GridHeight))
             .Add(new HealthSystem(contexts))
             .Add(new DestroySystem(contexts))
             ;

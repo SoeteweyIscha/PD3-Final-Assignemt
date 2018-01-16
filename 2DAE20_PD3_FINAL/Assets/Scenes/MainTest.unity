@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd213a47618e5e49b0d066868aadba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridWidth: 10
-  GridHeight: 10
+  GridWidth: 3
+  GridHeight: 7
   TurretRange: 5
   publicMoney: 0
   Bullet: {fileID: 1230923593475862, guid: a9e40806f92d09f49a2bd723cae2d564, type: 2}
