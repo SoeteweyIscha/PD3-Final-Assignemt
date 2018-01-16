@@ -32,6 +32,8 @@ public class DestroySystem : ReactiveSystem <GameEntity>
 
             e.Destroy();
         }
+
+        Clear();
     }
 
 

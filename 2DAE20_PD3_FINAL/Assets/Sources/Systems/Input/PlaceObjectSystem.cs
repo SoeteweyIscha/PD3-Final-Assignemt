@@ -9,14 +9,16 @@ public class PlaceObjectSystem : IExecuteSystem
     private float _maxSelectRange;
     private GameController _gameController;
     private GameController.Building _stateToSet;
+    private float _turretReloadTime;
 
 
-    public PlaceObjectSystem(Contexts contexts, float range, GameController gameController)
+    public PlaceObjectSystem(Contexts contexts, float range, GameController gameController, float turretReloadTime)
     {
         _contexts = contexts;
         
         _maxSelectRange = range;
         _gameController = gameController;
+        _turretReloadTime = turretReloadTime;
     }
 
     public void Execute()
@@ -59,9 +61,33 @@ public class PlaceObjectSystem : IExecuteSystem
             //Prepares the tile for a an object to be place upon it
             if (closest != null && GameController.Money >= 50)
             {
-                GameController.Money -= 50;
-                closest.AddBuiding(_stateToSet);
+                //closest.AddBuiding(_stateToSet);
                 closest.isClick = false;
+
+                GameEntity temp = _contexts.game.CreateEntity();
+                temp.AddVectorPos(closest.vectorPos.Position);
+                temp.AddGridPos(closest.gridPos.x, closest.gridPos.y);
+
+                switch (_stateToSet)
+                {
+                    case GameController.Building.Tower:
+                        temp.isTower = true;
+                        temp.AddHealth(3);
+                        temp.isTargeting = true;
+                        temp.AddTimer(0, _turretReloadTime);
+
+                        //Subtract Money
+                        GameController.Money -= 50;
+                        break;
+
+                    case GameController.Building.Wall:
+                        temp.isWall = true;
+                        temp.AddHealth(6);
+
+                        //Subtract Money
+                        GameController.Money -= 40;
+                        break;
+                }
             }
 
             //text for clarity

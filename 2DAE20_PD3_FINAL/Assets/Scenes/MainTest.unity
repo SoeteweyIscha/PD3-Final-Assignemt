@@ -364,7 +364,7 @@ MonoBehaviour:
   Bullet: {fileID: 1230923593475862, guid: a9e40806f92d09f49a2bd723cae2d564, type: 2}
   RocksVariable: 50
   MaxSelectDist: 12.14
-  _buildingState: 1
+  _buildingState: 0
   TestTarget: {fileID: 1575429865}
 --- !u!4 &878868472
 Transform:

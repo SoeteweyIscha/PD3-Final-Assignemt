@@ -28,7 +28,7 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
             {
                 foreach (GameEntity enemy in enemies)
                 {
-                    float dist = StaticFunctions.SqrDistance(tower.baseTile.tile.vectorPos.Position, enemy.vectorPos.Position);
+                    float dist = StaticFunctions.SqrDistance(tower.vectorPos.Position, enemy.vectorPos.Position);
                     if (dist < _turretRange * _turretRange)
                     {
 

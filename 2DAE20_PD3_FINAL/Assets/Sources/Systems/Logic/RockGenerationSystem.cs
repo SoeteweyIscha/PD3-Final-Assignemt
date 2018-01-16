@@ -18,10 +18,6 @@ public class RockGenerationSystem : IInitializeSystem {
         //Get tiles
         var tiles = _contexts.game.GetEntities(GameMatcher.Hex);
 
-        //Load Prefab
-        GameObject pre = Resources.Load<GameObject>("Rock");
-        GameObject RockShell = new GameObject("RockShell");
-
         //Generate rocks at random positions
         foreach (GameEntity e in tiles)
         {
@@ -40,11 +36,7 @@ public class RockGenerationSystem : IInitializeSystem {
                 int random = (int)Random.Range(0, 100f);
                 if (random <= _chance)
                 {
-
-                    Object.Destroy(e.view.View);
-                    GameObject temp = GameObject.Instantiate(pre, e.vectorPos.Position, Quaternion.identity, RockShell.transform);
-                    Color c = temp.GetComponentInChildren<Renderer>().material.color;
-                    e.ReplaceView(temp, c);
+                    e.isRock = true;
                     e.isWalkAble = false;
                     e.isClick = false;
                 }

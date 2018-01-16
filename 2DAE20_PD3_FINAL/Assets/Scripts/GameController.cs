@@ -67,21 +67,23 @@ public class GameController : MonoBehaviour {
 
             // INITIALISE
             .Add(new GridGenerationSystem(contexts, GridWidth, GridHeight))
-            .Add(new GridViewSystem(contexts))
+            //.Add(new GridViewSystem(contexts))
 
             //EXECUTE & REACTIVE
             .Add(new EnemyBuilderSystem(contexts))
-            .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this))
-            .Add(new TowerConstructorSystem(contexts, TurretReloadTime))
+            .Add(new PlaceObjectSystem(contexts, MaxSelectDist, this, TurretReloadTime))
+            //.Add(new TowerConstructorSystem(contexts, TurretReloadTime))
             .Add(new PathfindingSystem(contexts, GridHeight, GridWidth))
             .Add(new RockGenerationSystem(contexts, RocksVariable))
             .Add(new EnemyMovementSystem(contexts))
+            .Add(new ViewSystem(contexts))
             .Add(new MoveSystem(contexts))
             .Add(new TargetingSystem(contexts, TurretRange))
             .Add(new TimerSystem(contexts))
             .Add(new ShootSystem(contexts, TurretRange, Bullet))
             .Add(new ColliderSystem(contexts))
             .Add(new DestroySystem(contexts))
+
             ;
 
     }

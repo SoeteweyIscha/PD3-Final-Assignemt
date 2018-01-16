@@ -40,10 +40,7 @@ public class EnemyBuilderSystem : ReactiveSystem<GameEntity>
             entity.AddPath(0, GameController.StartPath);
             entity.isTargeting = true;
             entity.AddMove(1, Vector3.zero);
-
-            GameObject pre = Resources.Load<GameObject>("ShipPrefab");
-            GameObject temp = GameObject.Instantiate(pre);
-            entity.AddView(temp, temp.GetComponent<Renderer>().material.color);
+            entity.isEnemy = true;
 
             e.Destroy();
         }

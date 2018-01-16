@@ -29,7 +29,7 @@ public class TargetingSystem : IExecuteSystem
             {
                 foreach (var enemy in enemies)
                 {
-                    Vector3 offset = e.baseTile.tile.vectorPos.Position - enemy.vectorPos.Position;
+                    Vector3 offset = e.vectorPos.Position - enemy.vectorPos.Position;
                     float sqrLen = offset.sqrMagnitude;
                     if (sqrLen < _range * _range)
                         e.view.View.transform.LookAt(enemy.vectorPos.Position);
