@@ -16,6 +16,7 @@ namespace models
     {
         //Create variable
         private int _size;
+
         public string Axis;
 
         public event EventHandler<SizeChangedEventArgs> OnSizeChanged;

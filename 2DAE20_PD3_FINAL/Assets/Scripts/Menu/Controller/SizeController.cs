@@ -15,6 +15,7 @@ public class SizeController
     public void Init()
     {
         View.Size = Model.SizeValue;
+        View.Axis = Model.Axis;
 
         View.OnChangeSize += ChangeValue;
 

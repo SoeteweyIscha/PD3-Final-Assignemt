@@ -6,26 +6,41 @@ using models;
 
 public class Application : MonoBehaviour {
 
+
+    // Width
     [SerializeField]
-    private GameObject xSizeView;
-    private SizeModel xSizeModel;
-    private SizeController xSizeController;
+    private GameObject _xSizeView;
+    private SizeModel _xSizeModel;
+    private SizeController _xSizeController;
+
+    // Height
+    [SerializeField]
+    private GameObject _ySizeView;
+    private SizeModel _ySizeModel;
+    private SizeController _ySizeController;
 
 	// Use this for initialization
-	void Start () {
-        xSizeModel = new SizeModel();
-        xSizeModel.Axis = "Width";
-        xSizeModel.SizeValue = 10;
+	void Start ()
+    {
+        // Width
+        _xSizeModel = new SizeModel();
+        _xSizeModel.Axis = "Width";
+        _xSizeModel.SizeValue = 10;
 
-        xSizeController = new SizeController();
-        xSizeController.Model = xSizeModel;
-        xSizeController.View = xSizeView.GetComponent<ISizeView>();
+        _xSizeController = new SizeController();
+        _xSizeController.Model = _xSizeModel;
+        _xSizeController.View = _xSizeView.GetComponent<ISizeView>();
 
-        xSizeController.Init(); 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        //Height
+        _ySizeModel = new SizeModel();
+        _ySizeModel.Axis = "Height";
+        _ySizeModel.SizeValue = 10;
+
+        _ySizeController = new SizeController();
+        _ySizeController.Model = _ySizeModel;
+        _ySizeController.View = _ySizeView.GetComponent<ISizeView>();
+
+        _xSizeController.Init();
+        _ySizeController.Init();
 	}
 }
