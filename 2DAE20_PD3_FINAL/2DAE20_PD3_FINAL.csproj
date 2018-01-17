@@ -246,6 +246,7 @@
     <Compile Include="Assets\Scripts\Menu\Application.cs" />
     <Compile Include="Assets\Scripts\Menu\Controller\SizeController.cs" />
     <Compile Include="Assets\Scripts\Menu\Models\SizeModel.cs" />
+    <Compile Include="Assets\Scripts\Menu\ParsingScript.cs" />
     <Compile Include="Assets\Scripts\Menu\Views\SizeView.cs" />
     <Compile Include="Assets\Sources\Components\BaseTileComponent.cs" />
     <Compile Include="Assets\Sources\Components\BuidingComponent.cs" />

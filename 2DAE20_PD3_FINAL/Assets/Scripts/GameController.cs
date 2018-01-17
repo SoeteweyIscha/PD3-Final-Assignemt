@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour {
 
 	void Start ()
     {
+        GetValuesOnStart();
+
         var contexts = Contexts.sharedInstance;
 
         _gameContext = contexts;
@@ -108,4 +110,14 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    private void GetValuesOnStart()
+    {
+        GameObject capsule = GameObject.FindGameObjectWithTag("Data");
+        ParsingScript script = capsule.GetComponent<ParsingScript>();
+
+        GridWidth = script.Width;
+        GridHeight = script.Height;
+        RocksVariable = script.RocksVariable;
+
+    }
 }
