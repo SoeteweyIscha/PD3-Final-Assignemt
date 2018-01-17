@@ -55,13 +55,11 @@ public class ColliderSystem : IExecuteSystem {
                     if (building.isHomeBase)
                     {
                         building.health.Healthpoints -= enemy.health.Healthpoints;
-                        Debug.Log("Homebase health: " + building.health.Healthpoints);
                     }
                     else
                     {
                         building.isDestroy = true;
                         Tiles[building.gridPos.x * _rows + building.gridPos.y].isClick = true;
-                        //current.gridPos.x* _rows +current.gridPos.y
                     }
                     break;
                 } 

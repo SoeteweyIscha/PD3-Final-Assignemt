@@ -29,9 +29,8 @@ public class EnemyBuilderSystem : ReactiveSystem<GameEntity>
     {
         var builders = _contexts.game.GetEntities(GameMatcher.BuildEnemy);
 
-        foreach (var e in builders)
+        foreach (var entity in builders)
         {
-            var entity = _contexts.game.CreateEntity();
 
             entity.isEnemy = true;
             entity.AddGridPos(0, 0);
@@ -41,8 +40,7 @@ public class EnemyBuilderSystem : ReactiveSystem<GameEntity>
             entity.isTargeting = true;
             entity.AddMove(1, Vector3.zero);
             entity.isEnemy = true;
-
-            e.Destroy();
+            entity.isBuildEnemy = false;
         }
         Clear();
     }

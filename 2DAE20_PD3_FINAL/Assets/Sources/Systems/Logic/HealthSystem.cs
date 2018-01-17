@@ -24,6 +24,10 @@ public class HealthSystem : IExecuteSystem {
             {
                 e.isDestroy = true;
                 GameController.Money += 10;
+                if (e.isHomeBase)
+                {
+                    GameController.gameLoop = false;
+                }
             }
         }
     }

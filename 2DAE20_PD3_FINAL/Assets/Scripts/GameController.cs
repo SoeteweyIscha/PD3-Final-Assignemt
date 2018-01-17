@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     static public int Money = 100;
     public int publicMoney;
     public GameObject Bullet;
+    public static bool gameLoop = true;
 
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
@@ -51,8 +52,11 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        _systems.Execute();
-        publicMoney = Money;
+        if (gameLoop)
+        {
+            _systems.Execute();
+            publicMoney = Money;
+        }
 
         if (!_coroutineStarted)
         {
