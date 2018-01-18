@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     //Game variables, these influence the game
     public int GridWidth;
@@ -15,7 +16,10 @@ public class GameController : MonoBehaviour {
     public GameObject Bullet;
     public static bool gameLoop = true;
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
-    public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
+    public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it
+
+    [SerializeField]
+    private GameObject _gameOverMenu;
     
     // this value is given to the SelectButtonSystem
     public Building _buildingState; // Public for testing
@@ -27,8 +31,9 @@ public class GameController : MonoBehaviour {
     private bool _coroutineStarted = false;
 
     //Globals
-    public static List<GameEntity> StartPath = new List<GameEntity>();
+    static public List<GameEntity> StartPath = new List<GameEntity>();
     static public int Money = 100;
+    static public GameEntity startTile;
 
     //UI
     [SerializeField]
@@ -40,8 +45,13 @@ public class GameController : MonoBehaviour {
         set { _buildingState = value; }
     }
 
-	void Start ()
+	void Awake ()
     {
+        gameLoop = true;
+        StartPath = null;
+
+        Debug.Log("hi there");
+
         GetValuesOnStart();
 
         var contexts = Contexts.sharedInstance;
@@ -61,6 +71,18 @@ public class GameController : MonoBehaviour {
             _systems.Execute();
             publicMoney = Money;
             SetUIMoney();
+        }
+
+        else
+        {
+            StopCoroutine("CreateEnemies");
+            
+            _systems.ClearReactiveSystems();
+            _gameContext.game.Reset();
+            _gameContext.game.DestroyAllEntities();
+            _systems.TearDown();
+
+            _gameOverMenu.SetActive(true);
         }
 
         if (!_coroutineStarted)
@@ -130,5 +152,18 @@ public class GameController : MonoBehaviour {
     public void SetUIMoney()
     {
         _money.text = Money.ToString();
+    }
+
+    public void ChangeBuildingVar(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                _buildingState = Building.Tower;
+                break;
+            case 0:
+                _buildingState = Building.Wall;
+                break;
+        }
     }
 }

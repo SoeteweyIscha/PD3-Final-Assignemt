@@ -46,7 +46,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
             var enemiesArray = _contexts.game.GetEntities(GameMatcher.Enemy);
 
-            _spawnpoint = entitiesArray[0];
+            _spawnpoint = GameController.startTile;
             _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
 
             if (enemiesArray != null)
@@ -69,8 +69,8 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         //Get all hexes
         var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
 
-
-        _spawnpoint = entitiesArray[0];
+        _spawnpoint = GameController.startTile;
+        Debug.Log(_spawnpoint.gridPos.x + ", " + _spawnpoint.gridPos.y);
         _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
 
         GameController.StartPath = FindPath(entitiesArray, _spawnpoint);
@@ -159,7 +159,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         if (column % 2 == 1)
         {
             arrayPos = (column - 1) * _rows + row;
-            if (!visited[arrayPos] && tileArray[arrayPos].isWalkAble)
+            if (row > 0 && !visited[arrayPos] && tileArray[arrayPos].isWalkAble)
             {
                 UnvisitedNeighbours.Add(tileArray[arrayPos]);
             }

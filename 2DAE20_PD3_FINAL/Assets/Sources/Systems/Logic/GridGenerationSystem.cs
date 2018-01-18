@@ -11,6 +11,8 @@ public class GridGenerationSystem : IInitializeSystem {
     private float _widthOffSet = 1.6f;
     private float _heightOffSet = 1.8f;
 
+    private bool _firstSaved = false;
+
     public GridGenerationSystem(Contexts context, int x, int z)
     {
         _context = context;
@@ -42,6 +44,12 @@ public class GridGenerationSystem : IInitializeSystem {
                 entity.isHex = true;
                 entity.isWalkAble = true;
                 entity.isClick = true;
+
+                if (!_firstSaved)
+                {
+                    GameController.startTile = entity;
+                    _firstSaved = true;
+                }
 
                 if (w == _width-1 && h == _height-1)
                 {

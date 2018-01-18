@@ -245,6 +245,7 @@
     <Compile Include="Assets\Scripts\General\StaticFunctions.cs" />
     <Compile Include="Assets\Scripts\Menu\Application.cs" />
     <Compile Include="Assets\Scripts\Menu\Controller\SizeController.cs" />
+    <Compile Include="Assets\Scripts\Menu\GameOverMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\Models\SizeModel.cs" />
     <Compile Include="Assets\Scripts\Menu\ParsingScript.cs" />
     <Compile Include="Assets\Scripts\Menu\Views\SizeView.cs" />
