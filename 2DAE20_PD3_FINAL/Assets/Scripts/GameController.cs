@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     public static bool gameLoop = true;
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it
+    private float _widthOffSet = 1.6f;
+    private float _heightOffSet = 1.8f;
 
     [SerializeField]
     private GameObject _gameOverMenu;
@@ -50,9 +52,9 @@ public class GameController : MonoBehaviour
         gameLoop = true;
         StartPath = null;
 
-        Debug.Log("hi there");
-
         GetValuesOnStart();
+
+        PlaceCamera();
 
         var contexts = Contexts.sharedInstance;
 
@@ -165,5 +167,19 @@ public class GameController : MonoBehaviour
                 _buildingState = Building.Wall;
                 break;
         }
+    }
+
+    private void PlaceCamera()
+    {
+        Vector3 cameraPos = Vector3.zero;
+        Camera mainCam = Camera.main;
+
+        float xPos = (_widthOffSet * GridWidth) * 0.5f;
+        float yPos = (_heightOffSet * GridHeight) * 0.5f;
+
+        cameraPos = new Vector3(xPos, 20, yPos);
+
+        mainCam.transform.position = cameraPos;
+        mainCam.orthographicSize = GridHeight + 1;
     }
 }

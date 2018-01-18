@@ -8,6 +8,7 @@ public class ParsingScript : MonoBehaviour {
     public int Height;
     public int RocksVariable;
 
+
     private void Awake()
     {
         DontDestroyOnLoad(this);

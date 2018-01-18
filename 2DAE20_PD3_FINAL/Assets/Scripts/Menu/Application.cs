@@ -38,7 +38,7 @@ public class Application : MonoBehaviour {
         _xSizeModel.Axis = "Width";
         _xSizeModel.SizeValue = 10;
 
-        _xSizeController = new SizeController();
+        _xSizeController = new SizeController(5, 15);
         _xSizeController.Model = _xSizeModel;
         _xSizeController.View = _xSizeView.GetComponent<ISizeView>();
 
@@ -47,7 +47,7 @@ public class Application : MonoBehaviour {
         _ySizeModel.Axis = "Height";
         _ySizeModel.SizeValue = 10;
 
-        _ySizeController = new SizeController();
+        _ySizeController = new SizeController(5, 15);
         _ySizeController.Model = _ySizeModel;
         _ySizeController.View = _ySizeView.GetComponent<ISizeView>();
 
@@ -56,7 +56,7 @@ public class Application : MonoBehaviour {
         _rocksVarModel.Axis = "Rocks";
         _rocksVarModel.SizeValue = 30;
 
-        _rocksVarController = new SizeController();
+        _rocksVarController = new SizeController(20, 40);
         _rocksVarController.Model = _rocksVarModel;
         _rocksVarController.View = _rocksVarView.GetComponent<ISizeView>();
 
