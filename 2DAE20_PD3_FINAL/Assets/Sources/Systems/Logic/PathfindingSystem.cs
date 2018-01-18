@@ -117,7 +117,7 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
                 pathValues[neighbour] = pathValues[current] + neighbour.distance.Distance;
                 if (neighbour.hasBuiding)
-                    pathValues[neighbour] /= 4;
+                    pathValues[neighbour] = Mathf.Infinity;
                 queue.Enqueue(neighbour);
                 parents[neighbour] = current;
 

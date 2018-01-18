@@ -2,26 +2,23 @@
 using Entitas;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
     //Game variables, these influence the game
-
     public int GridWidth;
     public int GridHeight;
     public int TurretRange = 2;
     static public float TurretReloadTime = 1.5f;
-    static public int Money = 100;
     public int publicMoney;
     public GameObject Bullet;
     public static bool gameLoop = true;
-
     public float RocksVariable = 10; // Influences the amount of rocks placed in the scene
     public float MaxSelectDist; // The maximum distance allowed between the mouse and a hexagon in order to select it,
-                                // this value is given to the SelectButtonSystem
     
+    // this value is given to the SelectButtonSystem
     public Building _buildingState; // Public for testing
-    public Transform TestTarget; //public for testing
 
     //Bascics needed for behind the scenes
     private Systems _systems;
@@ -31,7 +28,11 @@ public class GameController : MonoBehaviour {
 
     //Globals
     public static List<GameEntity> StartPath = new List<GameEntity>();
+    static public int Money = 100;
 
+    //UI
+    [SerializeField]
+    private Text _money;
 
     public Building BuildingState
     {
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour {
         _systems = CreateSystems( contexts );
 
         _systems.Initialize();
+
     }
 
     private void Update()
@@ -58,6 +60,7 @@ public class GameController : MonoBehaviour {
         {
             _systems.Execute();
             publicMoney = Money;
+            SetUIMoney();
         }
 
         if (!_coroutineStarted)
@@ -113,11 +116,19 @@ public class GameController : MonoBehaviour {
     private void GetValuesOnStart()
     {
         GameObject capsule = GameObject.FindGameObjectWithTag("Data");
-        ParsingScript script = capsule.GetComponent<ParsingScript>();
+        if (capsule != null)
+        {
+            ParsingScript script = capsule.GetComponent<ParsingScript>();
 
-        GridWidth = script.Width;
-        GridHeight = script.Height;
-        RocksVariable = script.RocksVariable;
+            GridWidth = script.Width;
+            GridHeight = script.Height;
+            RocksVariable = script.RocksVariable;
+        }
 
+    }
+
+    public void SetUIMoney()
+    {
+        _money.text = Money.ToString();
     }
 }

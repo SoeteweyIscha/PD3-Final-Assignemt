@@ -27,7 +27,7 @@ public class EnemyMovementSystem : IExecuteSystem
             Vector3 nextTargetPos = nextTile.vectorPos.Position;
 
             //Check distance to current node
-            if (Vector3.Distance(enemyPos, nextTargetPos) < _range || enemy.move.direction == Vector3.zero)
+            if (Vector3.Distance(enemyPos, nextTargetPos) < _range /*|| enemy.move.direction == Vector3.zero*/)
             {
                 enemy.gridPos.x = nextTile.gridPos.x;
                 enemy.gridPos.y = nextTile.gridPos.y;

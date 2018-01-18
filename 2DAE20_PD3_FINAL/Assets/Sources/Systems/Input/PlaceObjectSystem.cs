@@ -63,6 +63,7 @@ public class PlaceObjectSystem : IExecuteSystem
             {
                 //closest.AddBuiding(_stateToSet);
                 closest.isClick = false;
+                
 
                 GameEntity temp = _contexts.game.CreateEntity();
                 temp.AddVectorPos(closest.vectorPos.Position);
@@ -71,6 +72,7 @@ public class PlaceObjectSystem : IExecuteSystem
                 switch (_stateToSet)
                 {
                     case GameController.Building.Tower:
+                        closest.AddBuiding(GameController.Building.Tower);
                         temp.isTower = true;
                         temp.isTargeting = true;
                         temp.AddTimer(0, _turretReloadTime);
@@ -80,6 +82,7 @@ public class PlaceObjectSystem : IExecuteSystem
                         break;
 
                     case GameController.Building.Wall:
+                        closest.AddBuiding(GameController.Building.Wall);
                         temp.isWall = true;
 
                         //Subtract Money

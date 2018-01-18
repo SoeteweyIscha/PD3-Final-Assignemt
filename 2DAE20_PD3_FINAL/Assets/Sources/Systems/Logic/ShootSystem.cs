@@ -46,7 +46,6 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
                         temp.AddView(bulletObject, c);
 
 
-                        Debug.Log("Shot");
                         tower.isShoot = false;
                         tower.AddTimer(0, GameController.TurretReloadTime);
                         break;
