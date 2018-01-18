@@ -6,14 +6,20 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
 
     private Contexts _contexts;
     private int _turretRange;
+    private int _turretDamage;
+    private int _sniperRange;
+    private int _sniperDamage;
     private GameObject _bullet;
     private GameObject _empty;
 
-    public ShootSystem(Contexts contexts, int turretRange, GameObject bullet)
+    public ShootSystem(Contexts contexts, int turretRange, GameObject bullet, int turretDamage)
     {
         _contexts = contexts;
         _turretRange = turretRange;
         _bullet = bullet;
+        _sniperRange = 2 * _turretRange;
+        _turretDamage = turretDamage;
+        _sniperDamage = 2 * turretDamage + 2;
     }
 
     public void Execute()
@@ -40,9 +46,20 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
 
                         //Makebullet;
                         GameEntity temp = _contexts.game.CreateEntity();
-                        temp.isBullet = true;
+
+                        if (tower.isTower)
+                        {
+                            temp.AddBullet(_turretDamage);
+                            temp.AddMove(15, aimDirection);
+                        }
+
+                        else
+                        {
+                            temp.AddBullet(_sniperDamage);
+                            temp.AddMove(30, aimDirection);
+                        }
                         temp.AddVectorPos(spawnPos);
-                        temp.AddMove(15, aimDirection);
+                       
                         temp.AddView(bulletObject, c);
 
 

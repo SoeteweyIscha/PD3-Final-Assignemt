@@ -36,7 +36,7 @@ public class ColliderSystem : IExecuteSystem {
                 if (range < _detectionRange * _detectionRange && !bullet.isDestroy)
                 {
                     bullet.isDestroy = true;
-                    enemy.health.Healthpoints -= 2;
+                    enemy.health.Healthpoints -= bullet.bullet.Damage;
                     break;
                 }
             }

@@ -8,19 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BulletComponent bulletComponent = new BulletComponent();
+    public BulletComponent bullet { get { return (BulletComponent)GetComponent(GameComponentsLookup.Bullet); } }
+    public bool hasBullet { get { return HasComponent(GameComponentsLookup.Bullet); } }
 
-    public bool isBullet {
-        get { return HasComponent(GameComponentsLookup.Bullet); }
-        set {
-            if (value != isBullet) {
-                if (value) {
-                    AddComponent(GameComponentsLookup.Bullet, bulletComponent);
-                } else {
-                    RemoveComponent(GameComponentsLookup.Bullet);
-                }
-            }
-        }
+    public void AddBullet(int newDamage) {
+        var index = GameComponentsLookup.Bullet;
+        var component = CreateComponent<BulletComponent>(index);
+        component.Damage = newDamage;
+        AddComponent(index, component);
+    }
+
+    public void ReplaceBullet(int newDamage) {
+        var index = GameComponentsLookup.Bullet;
+        var component = CreateComponent<BulletComponent>(index);
+        component.Damage = newDamage;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveBullet() {
+        RemoveComponent(GameComponentsLookup.Bullet);
     }
 }
 

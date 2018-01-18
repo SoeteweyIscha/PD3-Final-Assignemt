@@ -15,6 +15,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     private GameObject _enemy;
     private GameObject _rock;
     private GameObject _homeBase;
+    private GameObject _sniperModel;
 
     //GameObjects to work as parents for the objects in the scene
     private GameObject _towerShell;
@@ -22,6 +23,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     private GameObject _hexShell;
     private GameObject _enemyShell;
     private GameObject _rockShell;
+    private GameObject _sniperShell;
 
     public ViewSystem(Contexts contexts) : base(contexts.game)
     {
@@ -37,12 +39,15 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         _enemy = Resources.Load<GameObject>("Ship");
         _rock = Resources.Load<GameObject>("Rock");
         _homeBase = Resources.Load<GameObject>("Base");
+        _sniperModel = Resources.Load<GameObject>("Sniper");
 
         _towerShell = new GameObject("towerSHELL");
         _wallShell = new GameObject("wallSHELL");
         _hexShell = new GameObject("HexSHELL");
         _enemyShell = new GameObject("EnemySHELL");
         _rockShell = new GameObject("RockSHELL");
+        _sniperShell = new GameObject("SniperShell");
+
 
     }
 
@@ -55,7 +60,8 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                                                             GameMatcher.Enemy, 
                                                             GameMatcher.Bullet, 
                                                             GameMatcher.Rock,
-                                                            GameMatcher.HomeBase)
+                                                            GameMatcher.HomeBase,
+                                                            GameMatcher.Sniper)
                                                             );
     }
 
@@ -80,6 +86,12 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                 else if (e.isWall)
                 {
                     GameObject temp = GameObject.Instantiate(_wallModel, e.vectorPos.Position, Quaternion.identity, _wallShell.transform);
+                    e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
+                }
+
+                else if (e.isSniper)
+                {
+                    GameObject temp = GameObject.Instantiate(_sniperModel, e.vectorPos.Position, Quaternion.identity, _wallShell.transform);
                     e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
                 }
 

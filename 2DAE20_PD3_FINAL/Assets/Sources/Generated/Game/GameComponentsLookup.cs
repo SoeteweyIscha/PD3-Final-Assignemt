@@ -24,15 +24,16 @@ public static class GameComponentsLookup {
     public const int Path = 13;
     public const int Rock = 14;
     public const int Shoot = 15;
-    public const int Targeting = 16;
-    public const int Timer = 17;
-    public const int Tower = 18;
-    public const int VectorPos = 19;
-    public const int View = 20;
-    public const int WalkAble = 21;
-    public const int Wall = 22;
+    public const int Sniper = 16;
+    public const int Targeting = 17;
+    public const int Timer = 18;
+    public const int Tower = 19;
+    public const int VectorPos = 20;
+    public const int View = 21;
+    public const int WalkAble = 22;
+    public const int Wall = 23;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 24;
 
     public static readonly string[] componentNames = {
         "BaseTile",
@@ -51,6 +52,7 @@ public static class GameComponentsLookup {
         "Path",
         "Rock",
         "Shoot",
+        "Sniper",
         "Targeting",
         "Timer",
         "Tower",
@@ -77,6 +79,7 @@ public static class GameComponentsLookup {
         typeof(PathComponent),
         typeof(RockComponent),
         typeof(ShootComponent),
+        typeof(SniperComponent),
         typeof(TargetingComponent),
         typeof(TimerComponent),
         typeof(TowerComponent),

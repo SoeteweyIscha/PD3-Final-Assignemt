@@ -116,7 +116,7 @@ public class GameController : MonoBehaviour
             .Add(new MoveSystem(contexts))
             .Add(new TargetingSystem(contexts, TurretRange))
             .Add(new TimerSystem(contexts))
-            .Add(new ShootSystem(contexts, TurretRange, Bullet))
+            .Add(new ShootSystem(contexts, TurretRange, Bullet, 2))
             .Add(new ColliderSystem(contexts, GridWidth, GridHeight))
             .Add(new HealthSystem(contexts))
             .Add(new DestroySystem(contexts))
@@ -128,6 +128,7 @@ public class GameController : MonoBehaviour
     {
         Tower = 0,
         Wall = 1,
+        Sniper = 2
     }
 
     public IEnumerator CreateEnemies()
@@ -168,6 +169,9 @@ public class GameController : MonoBehaviour
                 break;
             case 0:
                 _buildingState = Building.Wall;
+                break;
+            case 2:
+                _buildingState = Building.Sniper;
                 break;
         }
     }

@@ -10,6 +10,7 @@ public class PlaceObjectSystem : IExecuteSystem
     private GameController _gameController;
     private GameController.Building _stateToSet;
     private float _turretReloadTime;
+    private float _sniperReloadTime;
 
 
     public PlaceObjectSystem(Contexts contexts, float range, GameController gameController, float turretReloadTime)
@@ -19,6 +20,7 @@ public class PlaceObjectSystem : IExecuteSystem
         _maxSelectRange = range;
         _gameController = gameController;
         _turretReloadTime = turretReloadTime;
+        _sniperReloadTime = 2 * turretReloadTime;
     }
 
     public void Execute()
@@ -54,39 +56,66 @@ public class PlaceObjectSystem : IExecuteSystem
                 {
                     shortestDist = distance;
                     closest = e;
+                    
                 }
             }
-
+            Debug.Log(shortestDist);
 
             //Prepares the tile for a an object to be place upon it
-            if (closest != null && GameController.Money >= 50)
+            if (closest != null)
             {
                 //closest.AddBuiding(_stateToSet);
                 closest.isClick = false;
                 
 
-                GameEntity temp = _contexts.game.CreateEntity();
-                temp.AddVectorPos(closest.vectorPos.Position);
-                temp.AddGridPos(closest.gridPos.x, closest.gridPos.y);
+                
 
                 switch (_stateToSet)
                 {
                     case GameController.Building.Tower:
-                        closest.AddBuiding(GameController.Building.Tower);
-                        temp.isTower = true;
-                        temp.isTargeting = true;
-                        temp.AddTimer(0, _turretReloadTime);
+                        if (GameController.Money >= 50)
+                        {
+                            GameEntity temp = _contexts.game.CreateEntity();
+                            temp.AddVectorPos(closest.vectorPos.Position);
+                            temp.AddGridPos(closest.gridPos.x, closest.gridPos.y);
+                            closest.AddBuiding(GameController.Building.Tower);
+                            temp.isTower = true;
+                            temp.isTargeting = true;
+                            temp.AddTimer(0, _turretReloadTime);
 
-                        //Subtract Money
-                        GameController.Money -= 50;
+                            //Subtract Money
+                            GameController.Money -= 50;
+                        }
                         break;
 
-                    case GameController.Building.Wall:
-                        closest.AddBuiding(GameController.Building.Wall);
-                        temp.isWall = true;
+                    case GameController.Building.Sniper:
+                        if (GameController.Money >= 100)
+                        {
+                            GameEntity sniper = _contexts.game.CreateEntity();
+                            sniper.AddVectorPos(closest.vectorPos.Position);
+                            sniper.AddGridPos(closest.gridPos.x, closest.gridPos.y);
+                            closest.AddBuiding(GameController.Building.Sniper);
+                            sniper.isSniper = true;
+                            sniper.isTargeting = true;
+                            sniper.AddTimer(0, _sniperReloadTime);
 
-                        //Subtract Money
-                        GameController.Money -= 40;
+                            GameController.Money -= 100;
+                        }
+                        break;
+
+
+                    case GameController.Building.Wall:
+                        if (GameController.Money >= 40)
+                        {
+                            GameEntity wall = _contexts.game.CreateEntity();
+                            wall.AddVectorPos(closest.vectorPos.Position);
+                            wall.AddGridPos(closest.gridPos.x, closest.gridPos.y);
+                            closest.AddBuiding(GameController.Building.Wall);
+                            wall.isWall = true;
+
+                            //Subtract Money
+                            GameController.Money -= 40;
+                        }
                         break;
                 }
             }
