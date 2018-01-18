@@ -27,6 +27,10 @@ public class DestroySystem : ReactiveSystem <GameEntity>
             //Destroy view Object in scene
             if (e.hasView)
                 UnityEngine.Object.Destroy(e.view.View);
+            if (e.isEnemy)
+            {
+                GameController.Counter += 1;
+            }
 
             e.Destroy();
         }

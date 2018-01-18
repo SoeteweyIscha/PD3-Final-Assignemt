@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour
     static public List<GameEntity> StartPath = new List<GameEntity>();
     static public int Money = 100;
     static public GameEntity startTile;
+    static public int Difficulty;
+    static public int Counter;
 
     //UI
     [SerializeField]
@@ -73,6 +75,7 @@ public class GameController : MonoBehaviour
             _systems.Execute();
             publicMoney = Money;
             SetUIMoney();
+            DifficultyHandler();
         }
 
         else
@@ -181,5 +184,14 @@ public class GameController : MonoBehaviour
 
         mainCam.transform.position = cameraPos;
         mainCam.orthographicSize = GridHeight + 1;
+    }
+
+    private void DifficultyHandler()
+    {
+        if (Counter > 10)
+        {
+            Difficulty += 2;
+            Counter = 0;
+        }
     }
 }
