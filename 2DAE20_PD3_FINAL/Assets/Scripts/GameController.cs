@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     public int GridWidth;
     public int GridHeight;
     public int TurretRange = 2;
-    static public float TurretReloadTime = 1.5f;
+    static public float TurretReloadTime = 1.2f;
     public int publicMoney;
     public GameObject Bullet;
     public static bool gameLoop = true;

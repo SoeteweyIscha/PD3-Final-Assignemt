@@ -22,9 +22,7 @@ public class DestroySystem : ReactiveSystem <GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        var objects = entities;
-
-        foreach (GameEntity e in objects)
+        foreach (GameEntity e in entities)
         {
             //Destroy view Object in scene
             if (e.hasView)
