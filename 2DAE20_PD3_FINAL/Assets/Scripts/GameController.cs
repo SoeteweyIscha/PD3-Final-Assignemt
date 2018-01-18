@@ -190,7 +190,7 @@ public class GameController : MonoBehaviour
     {
         if (Counter > 10)
         {
-            Difficulty += 2;
+            Difficulty += 3;
             Counter = 0;
         }
     }
