@@ -111,6 +111,7 @@ public class PlaceObjectSystem : IExecuteSystem
                             wall.AddVectorPos(closest.vectorPos.Position);
                             wall.AddGridPos(closest.gridPos.x, closest.gridPos.y);
                             closest.AddBuiding(GameController.Building.Wall);
+                            wall.AddHealth(2, null);
                             wall.isWall = true;
 
                             //Subtract Money

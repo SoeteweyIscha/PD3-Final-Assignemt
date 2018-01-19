@@ -31,6 +31,9 @@ public class RockGenerationSystem : IInitializeSystem {
                 }
             }
 
+            if (e == GameController.startTile)
+                canPlaceRock = false;
+
             if (canPlaceRock)
             {
                 int random = (int)Random.Range(0, 100f);

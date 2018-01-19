@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
 
     //Globals
     static public List<GameEntity> StartPath = new List<GameEntity>();
-    static public int Money = 100;
+    static public int Money = 120;
     static public GameEntity startTile;
     static public int Difficulty;
     static public int Counter;

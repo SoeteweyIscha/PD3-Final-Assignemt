@@ -87,6 +87,7 @@ public class ViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
                 {
                     GameObject temp = GameObject.Instantiate(_wallModel, e.vectorPos.Position, Quaternion.identity, _wallShell.transform);
                     e.AddView(temp, temp.GetComponentInChildren<Renderer>().material.color);
+                    e.health.Display = temp.GetComponentInChildren<Text>();
                 }
 
                 else if (e.isSniper)

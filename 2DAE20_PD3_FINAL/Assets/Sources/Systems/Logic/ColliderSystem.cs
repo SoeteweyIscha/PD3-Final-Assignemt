@@ -56,6 +56,12 @@ public class ColliderSystem : IExecuteSystem {
                     {
                         building.health.Healthpoints -= enemy.health.Healthpoints;
                     }
+
+                    else if (building.isWall)
+                    {
+                        enemy.isDestroy = true;
+                        building.health.Healthpoints -= 1;
+                    }
                     else
                     {
                         building.isDestroy = true;
