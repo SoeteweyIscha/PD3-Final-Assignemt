@@ -48,6 +48,14 @@ public class RockGenerationSystem : IInitializeSystem {
             
         }
 
+        foreach(GameEntity e in tiles)
+        {
+            if (!e.isRock)
+            {
+                e.isClick = true;
+            }
+        }
+
     }
 
 }

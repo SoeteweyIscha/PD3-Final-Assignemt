@@ -187,7 +187,11 @@ public class GameController : MonoBehaviour
         cameraPos = new Vector3(xPos, 20, yPos);
 
         mainCam.transform.position = cameraPos;
-        mainCam.orthographicSize = GridHeight + 1;
+        if (GridHeight > GridWidth)
+            mainCam.orthographicSize = GridHeight + 1;
+
+        else
+            mainCam.orthographicSize = GridWidth;
     }
 
     private void DifficultyHandler()

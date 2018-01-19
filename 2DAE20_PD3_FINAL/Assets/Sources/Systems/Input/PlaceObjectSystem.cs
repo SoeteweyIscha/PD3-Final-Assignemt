@@ -65,7 +65,7 @@ public class PlaceObjectSystem : IExecuteSystem
             if (closest != null)
             {
                 //closest.AddBuiding(_stateToSet);
-                closest.isClick = false;
+                
                 
 
                 
@@ -85,6 +85,7 @@ public class PlaceObjectSystem : IExecuteSystem
 
                             //Subtract Money
                             GameController.Money -= 50;
+                            closest.isClick = false;
                         }
                         break;
 
@@ -100,6 +101,7 @@ public class PlaceObjectSystem : IExecuteSystem
                             sniper.AddTimer(0, _sniperReloadTime);
 
                             GameController.Money -= 100;
+                            closest.isClick = false;
                         }
                         break;
 
@@ -116,6 +118,7 @@ public class PlaceObjectSystem : IExecuteSystem
 
                             //Subtract Money
                             GameController.Money -= 40;
+                            closest.isClick = false;
                         }
                         break;
                 }
