@@ -58,7 +58,7 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
 
                         tower.isShoot = false;
                         tower.AddTimer(0, GameController.TurretReloadTime);
-
+                        break;
                     }
 
                     else if (tower.isSniper && dist < _sniperRange * _sniperRange)
@@ -82,9 +82,10 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
 
                         tower.isShoot = false;
                         tower.AddTimer(0, GameController.TurretReloadTime * 1.5f);
+                        break;
                     }
 
-                    break;
+
                 }
             }
 
