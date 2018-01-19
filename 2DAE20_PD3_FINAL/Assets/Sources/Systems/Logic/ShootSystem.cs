@@ -35,7 +35,8 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
                 foreach (GameEntity enemy in enemies)
                 {
                     float dist = StaticFunctions.SqrDistance(tower.vectorPos.Position, enemy.vectorPos.Position);
-                    if (dist < _turretRange * _turretRange)
+
+                    if (tower.isTower && dist < _turretRange * _turretRange)
                     {
 
                         Vector3 aimDirection = tower.view.View.gameObject.transform.forward;
@@ -47,26 +48,43 @@ public class ShootSystem : IExecuteSystem, IInitializeSystem {
                         //Makebullet;
                         GameEntity temp = _contexts.game.CreateEntity();
 
-                        if (tower.isTower)
-                        {
-                            temp.AddBullet(_turretDamage);
-                            temp.AddMove(15, aimDirection);
-                        }
+                        temp.AddBullet(_turretDamage);
+                        temp.AddMove(15, aimDirection);
 
-                        else
-                        {
-                            temp.AddBullet(_sniperDamage);
-                            temp.AddMove(30, aimDirection);
-                        }
                         temp.AddVectorPos(spawnPos);
-                       
+
                         temp.AddView(bulletObject, c);
 
 
                         tower.isShoot = false;
                         tower.AddTimer(0, GameController.TurretReloadTime);
-                        break;
+
                     }
+
+                    else if (tower.isSniper && dist < _sniperRange * _sniperRange)
+                    {
+                        Vector3 aimDirection = tower.view.View.gameObject.transform.forward;
+                        Vector3 spawnPos = tower.view.View.transform.position + aimDirection;
+
+                        GameObject bulletObject = GameObject.Instantiate<GameObject>(_bullet, spawnPos, Quaternion.LookRotation(aimDirection), _empty.transform);
+                        Color c = bulletObject.GetComponent<Renderer>().material.color;
+
+                        //Makebullet;
+                        GameEntity temp = _contexts.game.CreateEntity();
+
+                        temp.AddBullet(_sniperDamage);
+                        temp.AddMove(30, aimDirection);
+
+                        temp.AddVectorPos(spawnPos);
+
+                        temp.AddView(bulletObject, c);
+
+
+                        tower.isShoot = false;
+                        tower.AddTimer(0, GameController.TurretReloadTime * 1.5f);
+                    }
+
+                    break;
                 }
             }
 

@@ -70,7 +70,6 @@ public class PathfindingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         var entitiesArray = _contexts.game.GetEntities(GameMatcher.Hex);
 
         _spawnpoint = GameController.startTile;
-        Debug.Log(_spawnpoint.gridPos.x + ", " + _spawnpoint.gridPos.y);
         _target = entitiesArray[(_columns - 1) * _rows + _rows - 1];
 
         GameController.StartPath = FindPath(entitiesArray, _spawnpoint);

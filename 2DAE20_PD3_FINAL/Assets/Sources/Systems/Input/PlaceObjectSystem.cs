@@ -59,17 +59,11 @@ public class PlaceObjectSystem : IExecuteSystem
                     
                 }
             }
-            Debug.Log(shortestDist);
 
             //Prepares the tile for a an object to be place upon it
             if (closest != null)
             {
-                //closest.AddBuiding(_stateToSet);
                 
-                
-
-                
-
                 switch (_stateToSet)
                 {
                     case GameController.Building.Tower:

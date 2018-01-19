@@ -6,11 +6,13 @@ public class TargetingSystem : IExecuteSystem
     private Contexts _contexts;
     private IGroup<GameEntity> _entities;
     private int _range;
+    private int _sniperRange;
 
     public TargetingSystem( Contexts contexts, int range)
     {
         _contexts = contexts;
         _range = range;
+        _sniperRange = 2 * range;
     }
 
     public void Execute()
@@ -31,8 +33,18 @@ public class TargetingSystem : IExecuteSystem
                 {
                     Vector3 offset = e.vectorPos.Position - enemy.vectorPos.Position;
                     float sqrLen = offset.sqrMagnitude;
-                    if (sqrLen < _range * _range)
-                        e.view.View.transform.LookAt(enemy.vectorPos.Position);
+
+                    if (e.isTower)
+                    {
+                        if (sqrLen < _range * _range)
+                            e.view.View.transform.LookAt(enemy.vectorPos.Position);
+                    }
+
+                    else
+                    {
+                        if (sqrLen < _sniperRange * _sniperRange)
+                            e.view.View.transform.LookAt(enemy.vectorPos.Position);
+                    }
                 }
             }
         }
