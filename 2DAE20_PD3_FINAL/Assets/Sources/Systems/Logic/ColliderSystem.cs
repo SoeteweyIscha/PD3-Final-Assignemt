@@ -23,7 +23,7 @@ public class ColliderSystem : IExecuteSystem {
 
         var enemies = _contexts.game.GetEntities(GameMatcher.Enemy);
 
-        var buildings = _contexts.game.GetEntities(GameMatcher.AnyOf(GameMatcher.Tower, GameMatcher.Wall, GameMatcher.HomeBase));
+        var buildings = _contexts.game.GetEntities(GameMatcher.AnyOf(GameMatcher.Tower, GameMatcher.Wall, GameMatcher.HomeBase, GameMatcher.Sniper));
 
         var bullets = _contexts.game.GetEntities(GameMatcher.Bullet);
 
